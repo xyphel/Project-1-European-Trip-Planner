@@ -1,0 +1,65 @@
+{
+  “Amsterdam”:{
+	“Stroopwafel”: 5.88,
+	“Thick Dutch Fries”: 3.21,
+	“Kibbeling”: 8.65
+	},
+  “Berlin”:{
+	“Pretzels”: 4.44,
+	“Apfelstrudel”: 6.25,
+	“Berliner Pfannkuche”: 8.23,
+	“Schnitzel”: 9.99
+	},
+  “Brussels”:{
+	“Waterzooi”: 6.48,
+	“Luikse Siroop”: 4.98,
+	“Mosselen-friet”: 4.45,
+	“Speculoos”: 2.79
+	},
+  “Budapest”:{
+	“Goulash”: 8.47,
+	“Stuffed Cabbage”: 6.99,
+	“Smoked Meat”: 12.99,
+	“Dodos Torta”: 2.79
+	},
+  “Hamburg”:{
+	“Hamburger Hummersuppe”: 6.46,
+	“Knackwurst”: 9.99,
+	“Krabbentoast”: 6.92,
+	“Franzbrötchen”: 12.74
+	},
+  “Lisbon”:{
+“Bacalhau”: 5.49,
+“Caldeirada”: 7.63,
+“Alcata”: 18.66
+	},
+  “London”:{
+	“Yorkshire Pudding”: 3.49,
+	“Bangers and Mash”: 6.63,
+	“Sticky Toffee Pudding”: 5.66
+	},
+  “Madrid”:{
+	“Bocata de Calamares”: 9.69,
+	“Oreja a la Plancha”: 11.85,
+	“Caracoles a la madrileña”: 6.94
+	},
+  “Paris”:{
+	“Caramels”: 4.76,
+	“Bordier Butter”: 5.65,
+	“Baguette”: 4.99,
+	“Pain au Chocolat”: 4.69
+	},
+  “Prague”:{
+	“Beef Steak Tartare”: 18.69,
+	“Kulajda”: 6.89,
+	“Svickova”: 5.98,
+	“Roast Duck”: 14.69
+	},
+  “Rome”:{
+	“Spaghetti alla Carbonara”: 6.88,
+	“Bruschetta”: 4.77,
+	“Scaloppine”: 12.99,
+	“Rigatoni con la Pajata”: 8.79,
+	“Carciofi alla Giudia”: 15.99
+	}
+}
