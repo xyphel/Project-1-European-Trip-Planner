@@ -8,14 +8,14 @@ function testPrint(inputMap)
   {
     for( let endCity of Object.entries(startCity) )
     {
-      console.log(”From %s to %s is %i miles.”, startCity, endCity[0], endCity[1]);
+      console.log("From %s to %s is %i miles.", startCity, endCity[0], endCity[1]);
     }
   }
 }
 
 function main()
 {
-  const distanceRequest = new Request(“distances.json”);
+  const distanceRequest = new Request("../data/distances.json");
   var cityDistances;
   
   // fetch returns a promise, which   must be handled, in case file is not found
