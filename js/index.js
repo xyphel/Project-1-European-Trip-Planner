@@ -4,13 +4,13 @@
 // https://javascript.info/keys-values-entries
 function testPrint(inputMap)
 {
-  for( let startCity of Object.keys(inputMap) )
+  Object.keys(inputMap).forEach( startCity =>
   {
-    for( let endCity of Object.entries(startCity) )
+    for( const [ endCity, distance] of  Object.entries(inputMap.value(startCity)) )
     {
-      console.log("From %s to %s is %i miles.", startCity, endCity[0], endCity[1]);
+      console.log(`From ${startCity} to ${endCity} is ${distance} miles.`);
     }
-  }
+  });
 }
 
 function main()
@@ -25,12 +25,14 @@ function main()
   (response) => response.json()).then(
 
     // what to do with the city distances object once received
-  (distancesObj) =>
+  (distancesObj) => {
     cityDistances = distancesObj
 
+    testPrint(cityDistances);
+  }
   // catching possible exceptions
   ).catch(console.error);
 
-testPrint(cityDistances);
+
 }
 // extending - file & storage apis
