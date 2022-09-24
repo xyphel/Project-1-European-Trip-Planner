@@ -1,5 +1,7 @@
 // index.js
 // Code
+const localPath = ".."
+const remotePath = "https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main"
 
 // https://javascript.info/keys-values-entries
 function testPrint(inputMap)
@@ -15,7 +17,8 @@ function testPrint(inputMap)
 
 function main()
 {
-  const distanceRequest = new Request("../data/distances.json");
+  // replace "remotePath" with "localPath" for local testing
+  const distanceRequest = new Request(`${remotePath}/data/distances.json`);
   var cityDistances;
   
   // fetch returns a promise, which   must be handled, in case file is not found
@@ -29,10 +32,15 @@ function main()
   {
     cityDistances = distancesObj;
     testPrint(cityDistances);
+
+      // A temporary HTML demonstration of data
+      let tempDisplay = document.getElementById("tempDisplay");
+      tempDisplay.textContent = JSON.stringify(cityDistances);
   }
   // catching possible exceptions
   ).catch(console.error);
 
 
+  
 }
 // extending - file & storage apis
