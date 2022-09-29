@@ -11,13 +11,16 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    plantripwindow.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    plantripwindow.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    plantripwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
