@@ -23,7 +23,7 @@ void MainWindow::on_pushButton_clicked()
     db.open();
     QSqlQuery q;
     QString data = "";
-    q.exec("SELECT * FROM distances");
+    q.exec("SELECT * FROM distances"); // SQL statement: means to output all values in the table
 
     while(q.next())
     {
@@ -33,6 +33,27 @@ void MainWindow::on_pushButton_clicked()
     }
 
     ui->textEdit->setText(data);
+
+    q.clear();
+    db.close();
+}
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    db.open();
+    QSqlQuery q;
+    QString data = "";
+    q.exec("SELECT * FROM foods"); // SQL statement: means to output all values in the table
+
+    while(q.next())
+    {
+        data += "City: " + q.value(0).toString();
+        data += "\nFood item: " + q.value(1).toString();
+        data += " Price: $" + q.value(2).toString() + "\n";
+    }
+
+    ui->textEdit_2->setText(data);
 
     q.clear();
     db.close();
