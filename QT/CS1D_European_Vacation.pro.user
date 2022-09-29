@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 5.0.3, 2022-09-29T01:37:26. -->
+<!-- Written by QtCreator 5.0.3, 2022-09-29T02:45:19. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -232,8 +232,9 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/andre/Documents/CS1D_European_Vacation/CS1D_European_Vacation.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/andre/Documents/CS1D_European_Vacation/CS1D_European_Vacation.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">CS1D_European_Vacation2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/andre/Documents/GitHub/Project-1-European-Trip-Planner/QT/CS1D_European_Vacation.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/andre/Documents/GitHub/Project-1-European-Trip-Planner/QT/CS1D_European_Vacation.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

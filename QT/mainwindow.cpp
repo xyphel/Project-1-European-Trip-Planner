@@ -23,13 +23,13 @@ void MainWindow::on_pushButton_clicked()
     db.open();
     QSqlQuery q;
     QString data = "";
-    q.exec("SELECT * FROM distances"); // SQL statement: means to output all values in the table
+    q.exec("SELECT * FROM distances WHERE Ending_City = 'Rome';"); // SQL statement: means to output all values in the table where ending city is rome
 
     while(q.next())
     {
         data += "Starting City: " + q.value(0).toString();
-        data += " Ending City: " + q.value(1).toString() + "\n";
-        data += "Distance between the two: " + q.value(2).toString() + "\n";
+        data += "\nEnding City: " + q.value(1).toString() + "\n";
+        data += "Distance between the two: " + q.value(2).toString() + "\n\n";
     }
 
     ui->textEdit->setText(data);
@@ -44,13 +44,27 @@ void MainWindow::on_pushButton_2_clicked()
     db.open();
     QSqlQuery q;
     QString data = "";
+    QString city = "";
+    QString newCity = "";
     q.exec("SELECT * FROM foods"); // SQL statement: means to output all values in the table
 
     while(q.next())
     {
-        data += "City: " + q.value(0).toString();
-        data += "\nFood item: " + q.value(1).toString();
-        data += " Price: $" + q.value(2).toString() + "\n";
+        city = q.value(0).toString();
+        if(city != newCity)
+        {
+            if(data == "")
+            {
+                data += "City: " + q.value(0).toString();
+            }
+            else
+            {
+                data += "\nCity: " + q.value(0).toString();
+            }
+            data += "\nTraditonal food items:\n";
+        }
+        data += q.value(1).toString() + ": $" + q.value(2).toString() + "\n";
+        newCity = city;
     }
 
     ui->textEdit_2->setText(data);
