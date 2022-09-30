@@ -5,7 +5,7 @@
 #include <QtSql/QtSql>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
-#include "planTripWindow.h"
+#include "plantripwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

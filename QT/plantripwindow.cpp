@@ -1,5 +1,5 @@
 #include "plantripwindow.h"
-#include "ui_plantripwindow.h"
+#include "ui_planTripWindow.h"
 
 planTripWindow::planTripWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,4 +11,12 @@ planTripWindow::planTripWindow(QWidget *parent) :
 planTripWindow::~planTripWindow()
 {
     delete ui;
+}
+
+void planTripWindow::on_pushButton_clicked()
+{
+    berlinPlanWindow = new berlinTripWindow(this);
+
+    berlinPlanWindow->show();
+    this->hide();
 }
