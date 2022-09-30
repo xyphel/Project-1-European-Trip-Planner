@@ -1,13 +1,17 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    QDir dir("../GitHub/Project-1-European-Trip-Planner/data/Cities.sqlite3");
+    QString path = dir.absolutePath();
     ui->setupUi(this);
+    qInfo() << path;
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Users/andre/Documents/CS1D_European_Vacation/DB/Cities.sqlite3");
+    db.setDatabaseName(path);
 }
 
 MainWindow::~MainWindow()
