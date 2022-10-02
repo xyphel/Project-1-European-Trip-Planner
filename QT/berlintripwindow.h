@@ -15,8 +15,12 @@ public:
     explicit berlinTripWindow(QWidget *parent = nullptr);
     ~berlinTripWindow();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::berlinTripWindow *ui;
+    int index;
 };
 
 #endif // BERLINTRIPWINDOW_H
