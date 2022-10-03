@@ -18,5 +18,5 @@ void berlinTripWindow::on_pushButton_clicked()
 {
     index = ui->stackedWidget->currentIndex();
     ui->stackedWidget->setCurrentIndex(index + 1);
-}
 
+}
