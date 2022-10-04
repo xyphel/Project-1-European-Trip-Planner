@@ -13,12 +13,14 @@ SOURCES += \
     berlintripwindow.cpp \
     main.cpp \
     mainwindow.cpp \
-    plantripwindow.cpp
+    plantripwindow.cpp \
+    travelplan.cpp
 
 HEADERS += \
     berlintripwindow.h \
     mainwindow.h \
-    plantripwindow.h
+    plantripwindow.h \
+    travelplan.h
 
 FORMS += \
     berlintripwindow.ui \

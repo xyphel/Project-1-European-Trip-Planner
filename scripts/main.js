@@ -1,10 +1,26 @@
 // index.js
 // Code
+
+// Database Handle
+let destinationDB;
+let configurationDB = window.localStorage;
+// Global State
+let isPlanActive; // jump to active plan
+let isPlanDrafted; // jump to saved plan
+let isPlanComplete; // jump to plan record
+
+// ---
+
 const localPath = ".."
 const remotePath = "https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main"
 
+async function initDBs()
+{
+
+}
+
 // https://javascript.info/keys-values-entries
-function testPrint(inputMap)
+/*function testPrint(inputMap)
 {
   Object.keys(inputMap).forEach( startCity =>
   {
@@ -13,10 +29,14 @@ function testPrint(inputMap)
       console.log(`From ${startCity} to ${endCity} is ${distance} miles.`);
     }
   });
-}
+}*/
 
-function main()
+
+async function main()
 {
+  initDBs();
+  initGlobals(idb);
+  /*
   // replace "remotePath" with "localPath" for local testing
   const distanceRequest = new Request(`${remotePath}/data/distances.json`);
   var cityDistances;
@@ -39,8 +59,9 @@ function main()
   }
   // catching possible exceptions
   ).catch(console.error);
-
+*/
 
   
 }
-// extending - file & storage apis
+
+main();
