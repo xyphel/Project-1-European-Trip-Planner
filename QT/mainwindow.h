@@ -18,6 +18,7 @@ class MainWindow : public QMainWindow
 public:
     QSqlDatabase db;
     MainWindow(QWidget *parent = nullptr);
+    void getDatabase();
     ~MainWindow();
 
 private slots:

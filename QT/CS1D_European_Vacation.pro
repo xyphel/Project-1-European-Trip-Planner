@@ -14,18 +14,21 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     plantripwindow.cpp \
+    summarypage.cpp \
     travelplan.cpp
 
 HEADERS += \
     berlintripwindow.h \
     mainwindow.h \
     plantripwindow.h \
+    summarypage.h \
     travelplan.h
 
 FORMS += \
     berlintripwindow.ui \
     mainwindow.ui \
-    plantripwindow.ui
+    plantripwindow.ui \
+    summarypage.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

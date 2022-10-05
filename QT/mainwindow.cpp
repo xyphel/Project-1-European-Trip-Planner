@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    QDir dir("../data/Cities.sqlite3");
+    QDir dir("../GitHub/Project-1-European-Trip-Planner/data/Cities.sqlite3");
     QString path = dir.absolutePath();
     ui->setupUi(this);
     qInfo() << path;
@@ -79,6 +79,5 @@ void MainWindow::on_pushButton_3_clicked()
     tripWindow = new planTripWindow(this);
 
     tripWindow->show();
-    this->hide();
 }
 

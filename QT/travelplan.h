@@ -30,9 +30,12 @@ public:
     string currentCity();
     int distanceTraveled();
     // Mutators include a recursive sort
+<<<<<<< HEAD
     void addDestination(string city);
     void removeDestination(string city);
     //void GetDatabase(); ???
+=======
+>>>>>>> e960ce450a589a15eab2be34385a25753824025e
 
     // TravelPlan already owns detinations, so only
     // SQL database handle is needed.
