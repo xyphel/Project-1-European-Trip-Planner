@@ -8,24 +8,22 @@ let planDB;
 /* createDatabase()
   initializes 
 */
-function createDatabase()
+async function createDatabase()
 {
   let databaseObject;
-  fetch(`${dataRemotePath}/distances.json`).then(
-    // Parse JSON into Object: the contents of the file may not be valid JSON, so another promise must be handled
-    (response) => response.json()).then(
-    // what to do with the city distances object once received
-    (destinationsObject) =>
-  {
-    databaseObject = Uint8Array.from(destinationsObject);
-  }
-  // catching possible exceptions
-  ).catch(console.error);
-  const SQL = await initSqlJs({
-    locateFile: file => `https://sql.js.org/dist/${file}`;
+  const dataPromise = fetch(`${dataRemotePath}/Cities.sqlite3`).then((response) => response.arrayBuffer());
+  const sqlPromiseQL = await initSqlJs({
+    locateFile: file => `https://sql.js.org/dist/${file}`
   });
+  const [SQL, dataBuffer] = await Promise.all([sqlPromise, dataPromise]);
+  
   destinationsDB = new SQL.Database(databaseObject);
+
+
   /* ======= IndexedDB is not relational =======
+      == Though not useful for destinations, ==
+       = may potentially be used for custom- =
+        == plan storage. ====================
   const requestPlanDB = window.indexedDB.open("TravelPlan", 0);
   requestPlanDB.onerror = (event) =>
   {
