@@ -3,7 +3,8 @@
 
 // Database Handle
 let destinationDB;
-let configurationDB = window.localStorage;
+let volatileStorage = window.sessionStorage;
+let persistentStorage = window.localStorage;
 // Global State
 let isPlanActive; // jump to active plan
 let isPlanDrafted; // jump to saved plan
@@ -14,9 +15,14 @@ let isPlanComplete; // jump to plan record
 const localPath = ".."
 const remotePath = "https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main"
 
-async function initDBs()
+async function initDestinationDB()
 {
 
+}
+async function initConfigurationDB()
+{
+  volatileStorage.setItem(1);
+  sessionStorage.setItem();
 }
 
 // https://javascript.info/keys-values-entries
@@ -34,7 +40,8 @@ async function initDBs()
 
 async function main()
 {
-  initDBs();
+  initDestinationDB();
+  initConfigurationDB();
   initGlobals(idb);
   /*
   // replace "remotePath" with "localPath" for local testing
