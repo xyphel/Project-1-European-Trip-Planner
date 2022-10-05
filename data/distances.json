@@ -1,0 +1,135 @@
+{
+	"Amsterdam":{
+	  "Berlin": 655,
+	  "Brussels": 236,
+	  "Budapest": 1395,
+	  "Hamburg": 361,
+	  "Lisbon": 2236,
+	  "London": 541,
+	  "Madrid": 1767,
+	  "Paris": 430,
+	  "Prague": 878,
+	  "Rome": 1647
+	  },
+	"Berlin":{
+	  "Amsterdam": 655,
+	  "Brussels": 765,
+	  "Budapest": 873,
+	  "Hamburg": 288,
+	  "Lisbon": 2779,
+	  "London": 678,
+	  "Madrid": 2392,
+	  "Paris": 1054,
+	  "Prague": 349,
+	  "Rome":1502
+	  },
+	"Brussels":{
+	  "Amsterdam": 236,
+	  "Berlin": 765,
+	  "Budapest": 1353,
+	  "Hamburg": 489,
+	  "Lisbon": 2357,
+	  "London": 403,
+	  "Madrid": 1578,
+	  "Paris": 313,
+	  "Rome": 1483
+	  },
+	"Budapest":{
+	  "Amsterdam": 1395,
+	  "Berlin": 873,
+	  "Brussels": 1353,
+	  "Hamburg": 1163,
+	  "Lisbon": 3069,
+	  "London": 1707,
+	  "Madrid": 2512,
+	  "Paris": 1485,
+	  "Prague": 525,
+	  "Rome": 1274
+	  },
+	"Hamburg":{
+	  "Amsterdam": 361,
+	  "Berlin": 288,
+	  "Brussels": 489,
+	  "Budapest": 1163,
+	  "Lisbon": 2121,
+	  "London": 930,
+	  "Madrid": 2171,
+	  "Paris": 376,
+	  "Prague": 640,
+	  "Rome": 1658
+	  },
+	"Lisbon":{
+	  "Amsterdam": 2236,
+	  "Berlin": 2779,
+	  "Brussels": 2357,
+	  "Budapest": 3069,
+	  "Hamburg": 2121,
+	  "London": 2189,
+	  "Madrid": 625,
+	  "Paris": 1736,
+	  "Prague": 2707,
+	  "Rome": 2510
+	  },
+	"London":{
+	  "Amsterdam": 541,
+	  "Berlin": 678,
+	  "Brussels": 403,
+	  "Budapest": 1707,
+	  "Hamburg": 930,
+	  "Lisbon": 2189,
+	  "Madrid": 1719,
+	  "Paris": 464,
+	  "Prague": 1265,
+	  "Rome": 1866
+	  },
+	"Madrid":{
+	  "Amsterdam": 1767,
+	  "Berlin": 2392,
+	  "Brussels": 1578,
+	  "Budapest": 2512,
+	  "Hamburg": 2171,
+	  "Lisbon": 625,
+	  "London": 1719,
+	  "Paris": 1633,
+	  "Prague": 2312,
+	  "Rome": 1951
+	  },
+	"Paris":{
+	  "Amsterdam": 430,
+	  "Berlin": 1054,
+	  "Brussels": 313,
+	  "Budapest": 1485,
+	  "Hamburg": 376,
+	  "Lisbon": 1736,
+	  "London": 464,
+	  "Madrid": 1633,
+	  "Prague": 1030,
+	  "Rome": 1442
+	  },
+	"Prague":{
+	  "Amsterdam": 878,
+	  "Berlin": 349,
+	  "Brussels": 898,
+	  "Budapest": 525,
+	  "Hamburg": 640,
+	  "Lisbon": 2707,
+	  "London": 1265,
+	  "Madrid": 2312,
+	  "Paris": 1030,
+	  "Rome": 1303
+	  },
+	"Rome":{
+	  "Amsterdam": 1647,
+	  "Berlin": 1502,
+	  "Brussels": 11483,
+	  "Budapest": 1247,
+	  "Hamburg": 1658,
+	  "Lisbon": 2510,
+	  "London": 1866,
+	  "Madrid": 1951,
+	  "Paris": 1442,
+	  "Prague": 1303
+	  }
+	  
+  }
+  
