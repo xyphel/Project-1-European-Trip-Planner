@@ -75,36 +75,49 @@ void berlinTripWindow::on_pushButton_2_clicked()
     }
 
     cost += s.toDouble();
+    qInfo() << cost;
 
     db.close();
 }
 
 void berlinTripWindow::on_pushButton_clicked()
 {
-    index++;
-    ui->comboBox->clear();
-    db.open();
-    QSqlQuery q;
-
-    qInfo() << visitedCities[index];
-
-    cityName = visitedCities[index];
-
-    ui->label->setText(cityName);
-    ui->label_2->setText("Welcome to " + cityName);
-
-    q.exec("SELECT food, Cost FROM foods WHERE City = \'" + cityName + "\'");
-    QString data = "";
-    QString dataCombo = "";
-    while(q.next())
+    if(index != 9)
     {
-        dataCombo = q.value(0).toString();
-        ui->comboBox->addItem(q.value(0).toString());
-        data += q.value(0).toString() + ": $" + q.value(1).toString() + "\n";
+        ui->comboBox->clear();
+        index++;
+        ui->comboBox->clear();
+        db.open();
+        QSqlQuery q;
 
+        qInfo() << visitedCities[index];
+
+        cityName = visitedCities[index];
+
+        ui->label->setText(cityName);
+        ui->label_2->setText("Welcome to " + cityName);
+
+        q.exec("SELECT food, Cost FROM foods WHERE City = \'" + cityName + "\'");
+        QString data = "";
+        QString dataCombo = "";
+        while(q.next())
+        {
+            dataCombo = q.value(0).toString();
+            ui->comboBox->addItem(q.value(0).toString());
+            data += q.value(0).toString() + ": $" + q.value(1).toString() + "\n";
+
+        }
+        ui->textBrowser->setText(data);
+        db.close();
     }
-    ui->textBrowser->setText(data);
-    db.close();
+    else
+    {
+        this->hide();
+        summaryWindow = new summarypage(this, cost);
+
+        summaryWindow->show();
+    }
+
 }
 void berlinTripWindow::FindClosestCity(const QString& city, std::vector<QString> &cities)
 {

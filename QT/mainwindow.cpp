@@ -79,6 +79,5 @@ void MainWindow::on_pushButton_3_clicked()
     tripWindow = new planTripWindow(this);
 
     tripWindow->show();
-    this->hide();
 }
 

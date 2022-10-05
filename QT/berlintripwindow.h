@@ -6,6 +6,7 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QVector>
+#include "summarypage.h"
 
 namespace Ui {
 class berlinTripWindow;
@@ -33,6 +34,7 @@ private:
     double cost;
     QString cityName;
     std::vector<QString> visitedCities;
+    summarypage *summaryWindow;
 };
 
 #endif // BERLINTRIPWINDOW_H
