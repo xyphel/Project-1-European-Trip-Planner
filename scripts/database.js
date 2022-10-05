@@ -1,3 +1,51 @@
+/* createDatabase()
+  initializes 
+*/
+let destinationDB;
+let planDB;
+
+function createDatabase()
+{}
+function listDistance(cityName)
+{}
+function listFood(cityName)
+{}
+function listCities(planName)
+{}
+function getDistance(city1Name, city2Name)
+{}
+function lowestDistance(cityList)
+{}
+function getFood(cityName)
+{}
+function addDistance(city1Name, city2Name, distance)
+{}
+function addFood(cityName, foodName, cost)
+{}
+function addDestination(planName, cityName, cityObject = null)
+{
+
+  // Guard statement in case city destinations are not provided
+  if( cityObject == null )
+  {
+    return;
+  }
+
+}
+
+function parseDistanceFile()
+{}
+function parseFoodFile()
+{}
+
+
+
+
+
+export {};
+
+
+
 // https://web.dev/indexeddb/
 function initIndexedDB
  {
@@ -19,3 +67,5 @@ if (!("indexedDB" in window)) {
     }
   });
  }
+
+

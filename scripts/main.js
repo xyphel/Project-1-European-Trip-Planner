@@ -1,9 +1,10 @@
 // index.js
-// Code
+// Dependencies
+import { pageAppSettings, pageTripSelector, pageTripCostomizer, pageTripViewer, pageTripRecord } from "./pages";
+import { createDatabase, listDistance, listFood, listCities, getDistance, lowestDistance, getFood, addDestination, addFood } from "./database"
 
 // Database Handle
 let destinationDB;
-let volatileStorage = window.sessionStorage;
 let persistentStorage = window.localStorage;
 // Global State
 let isPlanActive; // jump to active plan
@@ -36,13 +37,28 @@ async function initConfigurationDB()
     }
   });
 }*/
-
-
-async function main()
+// Runs immediately after Javascript is parsed
+async function init()
 {
-  initDestinationDB();
-  initConfigurationDB();
-  initGlobals(idb);
+  createDatabase();
+  if(persistentStorage.getItem("isAdmin") == null)
+  {
+    persistentStorage.setItem("isAdmin", "false")
+  }
+  
+}
+
+// Runs after DOM is finished loading
+function main()
+{
+  // DOM (HTML) Elements
+  const nav_settings = document.querySelector("#nav-settings");
+  const nav_home = document.querySelector("#nav-settings");
+  const nav_create = document.querySelector("#nav-settings");
+
+  // Volatile State
+  
+
   /*
   // replace "remotePath" with "localPath" for local testing
   const distanceRequest = new Request(`${remotePath}/data/distances.json`);
@@ -71,4 +87,4 @@ async function main()
   
 }
 
-main();
+init();

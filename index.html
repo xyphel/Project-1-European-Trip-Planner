@@ -8,16 +8,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>European Travel Planner</title>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="styles/index.css"></link>
+  <link rel="stylesheet" href="./styles/index.css"></link>
+  <script type="module" src="./scripts/database.js"></script>
+  <script type="module" src="./scripts/pages.js"></script>
   <script src="./scripts/main.js"></script>
 </head>
 <body onload="main()">
   <nav id="constant-header">
-    <a href="./sites/appSettings.html">Advanced</a>
-    <a href="./sites/tripViewer.html">My Plan</a>
-    <a href="./sites/tripSelector.html">New Plan</a>
+    <a id="nav-settings" href="#" data="./sites/appSettings.html">Advanced</a>
+    <a id="nav-home" href="#" data="./sites/tripViewer.html">My Plan</a>
+    <a id="nav-create" href="#" data="./sites/tripSelector.html">New Plan</a>
   </nav>
-
+  <main id="page-content"></main>
   <h1>European Travel Planner</h1>
   <div>
     <section id="distanceList"></section>
