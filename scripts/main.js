@@ -1,30 +1,29 @@
 // index.js
-// Dependencies
-import { pageAppSettings, pageTripSelector, pageTripCostomizer, pageTripViewer, pageTripRecord } from "./pages";
-import { createDatabase, listDistance, listFood, listCities, getDistance, lowestDistance, getFood, addDestination, addFood } from "./database"
+// Function Dependencies
+import { loadPage } from "./pages.js";
+import {
+  createDatabase,
+  listDistance, listFood, listCities, listPlans,
+  getDistance, lowestDistance, getFood,
+  addDistance, addFood, addCity,
+  parseDistanceFile, parseFoodFile
+} from "./database.js";
 
-// Database Handle
-let destinationDB;
-let persistentStorage = window.localStorage;
+
 // Global State
-let isPlanActive; // jump to active plan
-let isPlanDrafted; // jump to saved plan
-let isPlanComplete; // jump to plan record
-
+let persistentStorage = window.localStorage;
+const persistentState = [
+  "isAdmin",        // modify cities/foods
+  "isPlanActive",   // jump to active plan
+  "isPlanComplete", // jump to plan record
+  "isPlanDrafted"   // jump to saved plan
+];
 // ---
 
-const localPath = ".."
-const remotePath = "https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main"
+// const localPath = ".."
+// const remotePath = "https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main"
 
-async function initDestinationDB()
-{
 
-}
-async function initConfigurationDB()
-{
-  volatileStorage.setItem(1);
-  sessionStorage.setItem();
-}
 
 // https://javascript.info/keys-values-entries
 /*function testPrint(inputMap)
@@ -37,15 +36,21 @@ async function initConfigurationDB()
     }
   });
 }*/
+
+
 // Runs immediately after Javascript is parsed
 async function init()
 {
+  // Ensure database exists
   createDatabase();
-  if(persistentStorage.getItem("isAdmin") == null)
+  // Ensure global state exists
+  persistentState.forEach(stateKey =>
   {
-    persistentStorage.setItem("isAdmin", "false")
-  }
-  
+    if(persistentStorage.getItem(stateKey) == null)
+    {
+      persistentStorage.setItem(stateKey, "false")
+    }
+  });
 }
 
 // Runs after DOM is finished loading
@@ -55,9 +60,22 @@ function main()
   const nav_settings = document.querySelector("#nav-settings");
   const nav_home = document.querySelector("#nav-settings");
   const nav_create = document.querySelector("#nav-settings");
+  const page_content = document.querySelector("main");
 
-  // Volatile State
-  
+  // Select landing page based on global state
+  if(persistentStorage.getItem("isPlanActive") == true)
+  {
+    loadPage("tripViewer");
+  }
+  else if( persistentStorage.getItem("isPlanCompleted") == true )
+  {
+    loadPage("tripRecord");
+  }
+  else if( persistentStorage.getItem("isPlanDrafted") == true )
+  {
+    loadPage("tripSelector");
+  }
+
 
   /*
   // replace "remotePath" with "localPath" for local testing
@@ -87,4 +105,5 @@ function main()
   
 }
 
+document.body.onload = main();
 init();

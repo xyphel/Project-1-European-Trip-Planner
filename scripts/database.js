@@ -6,46 +6,99 @@ let planDB;
 
 function createDatabase()
 {}
-function listDistance(cityName)
+/*  ==== LocationDB ====  */
+/// Samplers
+/* listDestinations
+
+*/
+function listDistances(cityOrigin)
 {}
-function listFood(cityName)
+function listFoods(cityOrigin)
 {}
 function listCities(planName)
 {}
-function getDistance(city1Name, city2Name)
+function listPlans()
 {}
-function lowestDistance(cityList)
+function getDistance(cityOrigin, cityDestination)
 {}
-function getFood(cityName)
-{}
-function addDistance(city1Name, city2Name, distance)
-{}
-function addFood(cityName, foodName, cost)
-{}
-function addDestination(planName, cityName, cityObject = null)
+function efficientCityOrder(cityOrigin, cityDestinationList)
 {
-
-  // Guard statement in case city destinations are not provided
-  if( cityObject == null )
+  let orderedCities = [cityOrigin];
+  if(cityDestinationList.length == 0)
   {
-    return;
+    return cityOrigin;
   }
-
+  else
+  {
+    let lowestDistance = getDistance(cityOrigin, cityDestinationList[0]);
+    let lowestDistanceIndex = 0;
+    for(let i = 1; i < cityDestinationList.length; i++)
+    {
+      let currentDistance = getDistance(cityOrigin, cityDestinationList[i]);
+      if( currentDistance < lowestDistance)
+      {
+        lowestDistance = currentDistance;
+        lowestDistanceIndex = i;
+      }
+    }
+    const cityNext = cityDestinationList[lowestDistanceIndex];
+    orderedCities = orderedCities.concat(efficientCityOrder(city))
+  }
 }
+function getFoodCost(cityOrigin, foodName)
+{}
+
+/// Mutators (Admin Only)
+function addDistance(cityOrigin, cityDestination, distance)
+{}
+function addFood(cityOrigin, foodName, cost)
+{}
+function delDistance( cityOrigin, cityDestination )
+{}
+function delFood(cityOrigin, foodName)
+{}
+function delCity( cityOrigin )
+{}
+
+function modDistance(city1Name, city2Name, distance)
+{}
+function modFoodCost(cityName, foodName, cost)
+{}
+
 
 function parseDistanceFile()
 {}
 function parseFoodFile()
 {}
+/*  ========  */
+
+/*  ==== Plan DB ====  */
+/// Custom Plan Helpers
+function addPlan( planName, planObject = null )
+{}
+function delPlan( planName )
+{}
+function modPlanName( planOldName, planNewName )
+{}
+function addCityToPlan(planName, cityName)
+{}
+function removeCityFromPlan(planName, cityName)
+{}
+/*  ========  */
 
 
 
+export {
+  createDatabase,
+  listDistances, listFoods, listCities, listPlans,
+  getDistance, efficientCityOrder, getFoodCost,
+  addDistance, addFood, delDistance, delFood, delCity, modDistance, modFoodCost,
+  parseDistanceFile, parseFoodFile,
+  addPlan, delPlan, modPlanName, addCityToPlan, removeCityFromPlan
+};
 
 
-export {};
-
-
-
+/*
 // https://web.dev/indexeddb/
 function initIndexedDB
  {
@@ -67,5 +120,5 @@ if (!("indexedDB" in window)) {
     }
   });
  }
-
+*/
 

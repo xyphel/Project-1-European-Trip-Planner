@@ -1,11 +1,11 @@
 const pageRemotePath = "https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main/sites"
 
-function loadHTML( pageName )
+function loadHTML( pageName, pageContainer )
 {
     fetch(`${pageRemotePath}/${pageName}.html`).then(
         (response) => 
         {
-            document.body.replaceChildren(response)
+            pageContainer.replaceWith(response);
         }
         // catching possible exceptions
         ).catch(console.error);
@@ -13,23 +13,64 @@ function loadHTML( pageName )
 
 function pageAppSettings()
 {
-    loadHTML("appSettings");
+    // Before document is parsed
+    document.title = "Settings"
+    // After HTML is fully parsed
+    pageContainer.onload = () =>
+    {
+
+    };
 }
 function pageTripSelector()
 {
-    loadHTML("tripSelector");
+    document.title = "Selector"
+    pageContainer.onload = () =>
+    {
+
+    };
 }
 function pageTripCostomizer()
 {
-    loadHTML("tripCustomizer");
+    document.title = "Customizer"
+    pageContainer.onload = () =>
+    {
+
+    };
 }
 function pageTripViewer()
 {
-    loadHTML("tripViewer");
+    document.title = "Viewer"
+    pageContainer.onload = () =>
+    {
+
+    };
 }
 function pageTripRecord()
 {
-    loadHTML("tripRecord");
+    document.title = "Record"
+    pageContainer.onload = () =>
+    {
+
+    };
+}
+/* loadPage
+params:
+    pageName - string
+    pageContainer - container DOM (HTML) Element
+*/
+function loadPage( pageName, pageContainer )
+{
+    loadHTML(pageName);
+    switch (pageName)
+    {
+        case "appSettings":
+            pageAppSettings();
+            break;
+        case "tripSelector":
+            pageTripSelector();
+        default:
+            console.error(`Sorry, page ${pageName} does not yet exist!`)
+    }
 }
 
-export { pageAppSettings, pageTripSelector, pageTripCostomizer, pageTripViewer, pageTripRecord };
+export { loadPage };

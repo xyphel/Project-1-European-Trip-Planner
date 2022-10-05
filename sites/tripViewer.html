@@ -1,26 +1,6 @@
-<!DOCTYPE html>
 <!-- Site 3 -->
-
-<html lang="en">
-<head>
-  <!-- The following ensures site changes update on client side -->
-  <meta http-equiv="pragma" content="no-cache">
-  <meta http-equiv="expires" content="-1">
-  <!-- ^^^^^^ -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>View Travel Plan</title>
-  <link rel="manifest" href="../manifest.webmanifest">
-  <link resl="stylesheet" href="../styles/index.css"></link>
-  <script src="../scripts/main.js"></script>
-  <script src="../scripts/autoTripViewer.js"></script>
-</head>
-<body onload="auto()">
-  <nav id="constant-header">
-    <a href="./appSettings.html">Advanced</a>
-    <a>My Plan</a>
-    <a href="./tripSelector.html">New Plan</a>
-  </nav>
-
+<main>
+  
   <h1 id="plan-name">My Plan</h1>
   <h2 id="current-city"></h2>
   <button onpointerdown="newPlan()"></button>
@@ -32,5 +12,4 @@
 
   <button onpointerdown="finalizePlan()"></button>
 
-</body>
-</html>
+</main>
