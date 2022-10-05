@@ -28,14 +28,16 @@ public:
     ~TravelPlan();
     // Read-only properties
     string currentCity();
+    int distanceTraveled();
     // Mutators include a recursive sort
-    void addDestination();
-    void removeDestination();
+    void addDestination(string city);
+    void removeDestination(string city);
+    //void GetDatabase(); ???
 
     // TravelPlan already owns detinations, so only
     // SQL database handle is needed.
     Location findNearestDestination(QSqlDatabase* db);
-
+    vector<Location> findQuickestRoute(vector<string> destinations, QSqlDatabase* db);
 };
 
 #endif // TRAVELPLAN_H
