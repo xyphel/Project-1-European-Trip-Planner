@@ -31,6 +31,7 @@ public:
     // Mutators include a recursive sort
     void addDestination();
     void removeDestination();
+    void GetDatabase();
 
     // TravelPlan already owns detinations, so only
     // SQL database handle is needed.
