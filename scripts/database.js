@@ -1,11 +1,77 @@
+const dataRemotePath = "https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main/data";
+const initSqlJs = window.initSqlJs;
+let destinationsDB;
+//let distanceDB;
+//let foodDB;
+let planDB;
+
 /* createDatabase()
   initializes 
 */
-let destinationDB;
-let planDB;
-
 function createDatabase()
-{}
+{
+  let databaseObject;
+  fetch(`${dataRemotePath}/distances.json`).then(
+    // Parse JSON into Object: the contents of the file may not be valid JSON, so another promise must be handled
+    (response) => response.json()).then(
+    // what to do with the city distances object once received
+    (destinationsObject) =>
+  {
+    databaseObject = Uint8Array.from(destinationsObject);
+  }
+  // catching possible exceptions
+  ).catch(console.error);
+  const SQL = await initSqlJs({
+    locateFile: file => `https://sql.js.org/dist/${file}`;
+  });
+  destinationsDB = new SQL.Database(databaseObject);
+  /* ======= IndexedDB is not relational =======
+  const requestPlanDB = window.indexedDB.open("TravelPlan", 0);
+  requestPlanDB.onerror = (event) =>
+  {
+    console.error(`PlanDB request exception: ${event}`);
+  }
+  requestPlanDB.onsuccess = (event) =>
+  {
+    planDB = event.target.result;
+  }
+  requestPlanDB.onupgradeneeded = (event) =>
+  {
+    planDB = event.target.result;
+    // Create object stores for each origin city
+    fetch(`${dataRemotePath}/plan-templates.json`).then(
+      // Parse JSON into Object: the contents of the file may not be valid JSON, so another promise must be handled
+      (response) => response.json()).then(
+      // what to do with the city distances object once received
+      (plansFileObject) =>
+    {
+      Object.keys(plansFileObject).forEach( planName =>
+        {
+          const planStore = distanceDB.createObjectStore(planName);
+          cityOriginStore.createIndex("food", "", {unique: true});
+          for( const [ cityDestination, distance] of  Object.entries(distancesFileObject[cityOrigin]) )
+          {
+            cityOriginStore.
+          }
+        });
+      for (let cityDistancesObject in distancesFileObject)
+      {
+        
+        cityOriginStore
+      }
+    }
+    // catching possible exceptions
+    ).catch(console.error);
+    
+    
+  }
+
+  destinationDB.onerror = (event) =>
+  {
+    console.error(`DistanceDB database exception: ${event}`);
+  }*/
+}
+
 /*  ==== LocationDB ====  */
 /// Samplers
 /* listDestinations
@@ -66,9 +132,9 @@ function modFoodCost(cityName, foodName, cost)
 {}
 
 
-function parseDistanceFile()
+function parseDistanceFile( fileContent )
 {}
-function parseFoodFile()
+function parseFoodFile( fileContent )
 {}
 /*  ========  */
 
