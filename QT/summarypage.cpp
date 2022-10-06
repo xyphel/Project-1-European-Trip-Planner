@@ -1,25 +1,30 @@
 #include "summarypage.h"
 #include "ui_summarypage.h"
 
-summarypage::summarypage(QWidget *parent, double cost, std::vector<double> costItems, std::vector<QString> items) :
+summarypage::summarypage(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::summarypage)
 {
     ui->setupUi(this);
-    QString receipt = "";
-    for(int i = 0; i < costItems.size(); i++)
-    {
-        receipt += items[i] + ": $" + QString::number(costItems[i]) + "\n";
-    }
-
-    receipt += "\n\n---------------------------\nTotal cost: $" + QString::number(cost);
-
-    ui->textBrowser->setText(receipt);
 }
 
 summarypage::~summarypage()
 {
     delete ui;
+}
+
+void summarypage::GetData(Receipt currentReceipt)
+{
+    QString receipt = "";
+    for(int i = 0; i < currentReceipt.costOfItems.size(); i++)
+    {
+        receipt += currentReceipt.itemsBought[i] + ": $" + QString::number(currentReceipt.costOfItems[i]) + "\n";
+    }
+
+    receipt += "\n\n---------------------------\nTotal cost: $" + QString::number(currentReceipt.cost);
+    receipt += "\n\nDistance Traveled: " + QString::number(currentReceipt.distanceTraveled) + "km";
+
+    ui->textBrowser->setText(receipt);
 }
 
 void summarypage::on_pushButton_clicked()

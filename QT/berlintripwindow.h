@@ -31,9 +31,7 @@ private slots:
 private:
     Ui::berlinTripWindow *ui;
     int index;
-    double cost;
-    std::vector<double> costOfItems;
-    std::vector<QString> itemsBought;
+    Receipt currentReceipt;
     QString cityName;
     std::vector<QString> visitedCities;
     summarypage *summaryWindow;

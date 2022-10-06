@@ -10,7 +10,8 @@ berlinTripWindow::berlinTripWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     index = 0;
-    cost = 0;
+    currentReceipt.cost = 0;
+    currentReceipt.distanceTraveled = 0;
     cityName = "Berlin";
     QFont font = ui->label->font();
     font.setBold(true);
@@ -21,8 +22,7 @@ berlinTripWindow::berlinTripWindow(QWidget *parent) :
     ui->label_2->setFont(font);
     ui->label_2->setText("Welcome to " + cityName);
     ui->label->setText(cityName);
-
-    QDir dir("../data/Cities.sqlite3");
+    QDir dir("../GitHub/Project-1-European-Trip-Planner/data/Cities.sqlite3");
     QString path = dir.absolutePath();
     qInfo() << path;
     db = QSqlDatabase::addDatabase("QSQLITE");
@@ -67,7 +67,7 @@ void berlinTripWindow::on_pushButton_2_clicked()
     QString s = "";
     QSqlQuery q;
     s = ui->comboBox->currentText();
-    itemsBought.push_back(s);
+    currentReceipt.itemsBought.push_back(s);
     string = "SELECT cost FROM foods WHERE food = \'" + s + "\'";
     q.exec(string);
     while(q.next())
@@ -75,9 +75,9 @@ void berlinTripWindow::on_pushButton_2_clicked()
         s = q.value(0).toString();
     }
 
-    costOfItems.push_back(s.toDouble());
-    cost += s.toDouble();
-    qInfo() << cost;
+    currentReceipt.costOfItems.push_back(s.toDouble());
+    currentReceipt.cost += s.toDouble();
+    qInfo() << currentReceipt.cost;
 
     db.close();
 }
@@ -110,12 +110,21 @@ void berlinTripWindow::on_pushButton_clicked()
 
         }
         ui->textBrowser->setText(data);
+
+        q.exec("SELECT Distance FROM Distances WHERE Starting_City = \'" + cityName + "\' AND Ending_City = \'" + visitedCities[index-1] + "\'");
+        while(q.next())
+        {
+            currentReceipt.distanceTraveled += q.value(0).toDouble();
+            qInfo() << currentReceipt.distanceTraveled;
+
+        }
         db.close();
     }
     else
     {
         this->hide();
-        summaryWindow = new summarypage(this, cost, costOfItems, itemsBought);
+        summaryWindow = new summarypage(this);
+        summaryWindow->GetData(currentReceipt);
 
         summaryWindow->show();
     }

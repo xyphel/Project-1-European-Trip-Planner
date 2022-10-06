@@ -3,6 +3,13 @@
 
 #include <QDialog>
 
+struct Receipt{
+    std::vector<double> costOfItems;
+    std::vector<QString> itemsBought;
+    double cost;
+    int distanceTraveled;
+};
+
 namespace Ui {
 class summarypage;
 }
@@ -12,8 +19,8 @@ class summarypage : public QDialog
     Q_OBJECT
 
 public:
-    summarypage(QWidget *parent = nullptr, double cost = 0,
-                         std::vector<double> costItems = {}, std::vector<QString> items = {});
+    explicit summarypage(QWidget *parent = nullptr);
+    void GetData(Receipt currentReceipt);
     ~summarypage();
 
 private slots:
