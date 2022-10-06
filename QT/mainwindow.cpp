@@ -6,12 +6,31 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    QDir dir("../data/Cities.sqlite3");
+    QDir dir("../GitHub/Project-1-European-Trip-Planner/data/Cities.sqlite3");
     QString path = dir.absolutePath();
     ui->setupUi(this);
+    ui->comboBox->addItem("Select City");
+    ui->comboBox_2->addItem("Select City");
     qInfo() << path;
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(path);
+
+    db.open();
+    QSqlQuery q;
+    q.exec("SELECT * FROM foods"); // SQL statement: means to output all values in the table
+    QString name = "";
+    while(q.next())
+    {
+        if(name != q.value(0).toString())
+        {
+            ui->comboBox->addItem(q.value(0).toString());
+            ui->comboBox_2->addItem(q.value(0).toString());
+        }
+        ui->comboBox_2->removeItem(11);
+        name = q.value(0).toString();
+    }
+
+    db.close();
 }
 
 MainWindow::~MainWindow()
@@ -39,45 +58,45 @@ void MainWindow::on_pushButton_clicked()
     db.close();
 }
 
-
 void MainWindow::on_pushButton_2_clicked()
-{
-    db.open();
-    QSqlQuery q;
-    QString data = "";
-    QString city = "";
-    QString newCity = "";
-    q.exec("SELECT * FROM foods"); // SQL statement: means to output all values in the table
-
-    while(q.next())
-    {
-        city = q.value(0).toString();
-        if(city != newCity)
-        {
-            if(data == "")
-            {
-                data += "City: " + q.value(0).toString();
-            }
-            else
-            {
-                data += "\nCity: " + q.value(0).toString();
-            }
-            data += "\nTraditonal food items:\n";
-        }
-        data += q.value(1).toString() + ": $" + q.value(2).toString() + "\n";
-        newCity = city;
-    }
-
-    ui->textEdit_2->setText(data);
-
-    q.clear();
-    db.close();
-}
-
-void MainWindow::on_pushButton_3_clicked()
 {
     tripWindow = new planTripWindow(this);
 
     tripWindow->show();
+}
+
+
+void MainWindow::on_comboBox_currentIndexChanged(int index)
+{
+    db.open();
+    QSqlQuery q;
+    q.exec("SELECT food, cost FROM foods WHERE City = \'" + ui->comboBox->itemText(index) + "\'"); // SQL statement: means to output all values in the table
+    QString data = "";
+    while(q.next())
+    {
+        data += q.value(0).toString() + ": $" + q.value(1).toString() + "\n";
+
+    }
+    ui->textEdit_2->setText(data);
+
+    db.close();
+}
+
+
+void MainWindow::on_comboBox_2_currentIndexChanged(int index)
+{
+    db.open();
+    QSqlQuery q;
+    q.exec("SELECT Distance FROM Distances WHERE Ending_City = 'Rome' AND Starting_City = \'" + ui->comboBox->itemText(index) + "\'"); // SQL statement: means to output all values in the table
+    QString data = "";
+    while(q.next())
+    {
+        data = "Distance from " + ui->comboBox->itemText(index) + " to Rome is ";
+        data += q.value(0).toString() + "km";
+
+    }
+    ui->textEdit->setText(data);
+
+    db.close();
 }
 
