@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Berlin Plan",
+        "description": "A lutious route through 11 cities nearest to Berlin.",
+        "is_custom": "false",
+        "destination": [
+            "Berlin",
+            "Hamburg",
+            "Amsterdam",
+            "Brussels",
+            "Paris",
+            "London",
+            "Prague",
+            "Budapest",
+            "Rome",
+            "Madrid"
+        ]
+    },
+    {
+        "name": "Paris Plan",
+        "description": "Beginning with France's beautifu capitol, map your own route through Europe.",
+        "is_custom": "false",
+        "destination": [
+            "Paris"
+        ]
+    },
+    {
+        "name": "Amsterdam Plan",
+        "description": "A promenade through 13 premier cities of Europe closest to Amsterdam.",
+        "is_custom": "false",
+        "destination": [
+            "Amsterdam",
+            "Brussels",
+            "Paris",
+            "London",
+            "Prague",
+            "Budapest",
+            "Rome",
+            "Madrid"
+        ]
+    }
+]

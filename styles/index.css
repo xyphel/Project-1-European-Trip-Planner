@@ -1,6 +1,38 @@
+html, body {
+    padding: 0;
+    margin: 0;
+}
 
 /* A temporary HTML demonstration of data */
 #tempDisplay {
     width: 90vw;
     height: 90vh;
+}
+#nav-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 10%;
+    text-align: center;
+}
+#nav-settings {
+
+}
+#nav-home {
+
+}
+#nav-create {
+
+}
+#nav-background {
+    position: float;
+    width: 100%;
+    height: 80%;
+    background-color: rgb(62, 165, 255);
+}
+
+.nav-item {
+    position: relative;
+    bottom: -80%;
+    width:max-content;
 }

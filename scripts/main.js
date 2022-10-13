@@ -3,20 +3,21 @@
 import { loadPage } from "./pages.js";
 import {
   createDatabase,
-  listDistance, listFood, listCities, listPlans,
-  getDistance, lowestDistance, getFood,
-  addDistance, addFood, addCity,
-  parseDistanceFile, parseFoodFile
+  listDistances, listFoods, listCities, listPlans,
+  getDistance, efficientCityOrder, getFoodCost,
+  addDistance, addFood, delDistance, delFood, delCity, modDistance, modFoodCost,
+  parseDistanceFile, parseFoodFile,
+  addPlan, delPlan, modPlanName, addCityToPlan, removeCityFromPlan
 } from "./database.js";
 
 
 // Global State
-let persistentStorage = window.localStorage;
-const persistentState = [
-  "isAdmin",        // modify cities/foods
-  "isPlanActive",   // jump to active plan
-  "isPlanComplete", // jump to plan record
-  "isPlanDrafted"   // jump to saved plan
+let persistent_storage = window.localStorage;
+const persistent_state = [
+  "is_admin",        // modify cities/foods
+  "is_plan_active",   // jump to active plan
+  "is_plan_complete", // jump to plan record
+  "is_plan_drafted"   // jump to saved plan
 ];
 // ---
 
@@ -44,11 +45,11 @@ async function init()
   // Ensure database exists
   createDatabase();
   // Ensure global state exists
-  persistentState.forEach(stateKey =>
+  persistent_state.forEach(state_key =>
   {
-    if(persistentStorage.getItem(stateKey) == null)
+    if(persistent_storage.getItem(state_key) == null)
     {
-      persistentStorage.setItem(stateKey, "false")
+      persistent_storage.setItem(state_key, "false")
     }
   });
 }
@@ -58,24 +59,27 @@ function main()
 {
   // DOM (HTML) Elements
   const nav_settings = document.querySelector("#nav-settings");
-  const nav_home = document.querySelector("#nav-settings");
-  const nav_create = document.querySelector("#nav-settings");
-  const page_content = document.querySelector("main");
+  const nav_home = document.querySelector("#nav-home");
+  const nav_create = document.querySelector("#nav-create");
 
   // Select landing page based on global state
-  if(persistentStorage.getItem("isPlanActive") == true)
+  if(persistent_storage.getItem("is_plan_active") == true)
   {
     loadPage("tripViewer");
   }
-  else if( persistentStorage.getItem("isPlanCompleted") == true )
+  else if( persistent_storage.getItem("is_plan_completed") == true )
   {
     loadPage("tripRecord");
   }
-  else if( persistentStorage.getItem("isPlanDrafted") == true )
+  else if( persistent_storage.getItem("is_plan_drafted") == true )
+  {
+    loadPage("tripCustomizer");
+  }
+  else
   {
     loadPage("tripSelector");
   }
-
+  loadPage("appSettings");
 
   /*
   // replace "remotePath" with "localPath" for local testing
@@ -101,8 +105,6 @@ function main()
   // catching possible exceptions
   ).catch(console.error);
 */
-
-  
 }
 
 document.body.onload = main();

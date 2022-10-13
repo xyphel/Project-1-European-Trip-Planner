@@ -1,9 +1,9 @@
-const dataRemotePath = "https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main/data";
+const dataRemotePath = "https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/QT/QT/DB";
 const initSqlJs = window.initSqlJs;
-let destinationsDB;
-//let distanceDB;
-//let foodDB;
-let planDB;
+// Database holding both location distances and foods
+let destination_DB;
+// Database holding template and custom plans
+let plan_DB;
 
 /* createDatabase()
   initializes 
@@ -11,13 +11,13 @@ let planDB;
 async function createDatabase()
 {
   let databaseObject;
-  const dataPromise = fetch(`${dataRemotePath}/Cities.sqlite3`).then((response) => response.arrayBuffer());
-  const sqlPromiseQL = await initSqlJs({
-    locateFile: file => `https://sql.js.org/dist/${file}`
+  const data_promise = fetch(`${dataRemotePath}/Cities.sqlite3`).then((response) => response.arrayBuffer());
+  const sql_promise = await initSqlJs({
+    locateFile: file => `/dist/${file}`
   });
-  const [SQL, dataBuffer] = await Promise.all([sqlPromise, dataPromise]);
+  const [SQL, data_buffer] = await Promise.all([sql_promise, data_promise]);
   
-  destinationsDB = new SQL.Database(databaseObject);
+  destination_DB = new SQL.Database(new Uint8Array(data_buffer));
 
 
   /* ======= IndexedDB is not relational =======
@@ -80,7 +80,7 @@ function listDistances(cityOrigin)
 function listFoods(cityOrigin)
 {}
 function listCities(planName)
-{}
+{} 
 function listPlans()
 {}
 function getDistance(cityOrigin, cityDestination)
