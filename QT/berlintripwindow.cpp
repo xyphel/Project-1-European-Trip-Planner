@@ -22,14 +22,9 @@ berlinTripWindow::berlinTripWindow(QWidget *parent) :
     ui->label_2->setFont(font);
     ui->label_2->setText("Welcome to " + cityName);
     ui->label->setText(cityName);
-    QDir dir("../GitHub/Project-1-European-Trip-Planner/data/Cities.sqlite3");
-    QString path = dir.absolutePath();
-    qInfo() << path;
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(path);
 
-    // displays first city
-    db.open();
+    SetDataBase();
+    ConnOpen();
 
     QSqlQuery q;
     q.exec("SELECT food, Cost FROM foods WHERE City = 'Berlin'");
@@ -46,7 +41,7 @@ berlinTripWindow::berlinTripWindow(QWidget *parent) :
     font.setPointSize(10);
     ui->textBrowser->setFont(font);
     ui->textBrowser->setText(data);
-    db.close();
+    ConnClose();
 
     visitedCities.push_back(cityName);
     FindClosestCity(cityName, visitedCities);
@@ -62,7 +57,7 @@ berlinTripWindow::~berlinTripWindow()
 
 void berlinTripWindow::on_pushButton_2_clicked()
 {
-    db.open();
+    ConnOpen();
     QString string = "";
     QString s = "";
     QSqlQuery q;
@@ -79,7 +74,7 @@ void berlinTripWindow::on_pushButton_2_clicked()
     currentReceipt.cost += s.toDouble();
     qInfo() << currentReceipt.cost;
 
-    db.close();
+    ConnClose();
 }
 
 void berlinTripWindow::on_pushButton_clicked()
@@ -89,7 +84,7 @@ void berlinTripWindow::on_pushButton_clicked()
         ui->comboBox->clear();
         index++;
         ui->comboBox->clear();
-        db.open();
+        ConnOpen();
         QSqlQuery q;
 
         qInfo() << visitedCities[index];
@@ -118,7 +113,7 @@ void berlinTripWindow::on_pushButton_clicked()
             qInfo() << currentReceipt.distanceTraveled;
 
         }
-        db.close();
+        ConnClose();
     }
     else
     {
@@ -134,7 +129,7 @@ void berlinTripWindow::FindClosestCity(const QString& city, std::vector<QString>
 {
     if(cities.size() != 10)
     {
-        db.open();
+        ConnOpen();
         std::list<QString> End;
         QSqlQuery q;
         QString string = "SELECT Ending_City FROM Distances WHERE Starting_City = \'" + city + "\' ORDER BY Distance ASC";
@@ -152,7 +147,7 @@ void berlinTripWindow::FindClosestCity(const QString& city, std::vector<QString>
         FindClosestCity(End.front(), cities);
     }
 
-    db.close();
+    ConnClose();
 }
 
 bool berlinTripWindow::CheckIfCityWasVisited(const QString& CITY, std::vector<QString>& visitedCities)

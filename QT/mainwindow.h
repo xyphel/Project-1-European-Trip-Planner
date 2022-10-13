@@ -17,6 +17,30 @@ class MainWindow : public QMainWindow
 
 public:
     QSqlDatabase db;
+
+    void SetDataBase()
+    {
+        db = QSqlDatabase::addDatabase("QSQLITE");
+        QString path = "C:/Users/andre/Documents/GitHub/Project-1-European-Trip-Planner/QT/DB/Cities.sqlite3";
+        qInfo() << path;
+        db.setDatabaseName(path);
+
+    }
+
+    void ConnOpen()
+    {
+        if(db.open())
+        {
+            qDebug() << ("Connected.");
+
+        } else {
+
+            qDebug() << ("Not Connected.");
+        }
+    }
+
+    void ConnClose() { db.close();}
+
     MainWindow(QWidget *parent = nullptr);
     void getDatabase();
     ~MainWindow();

@@ -6,16 +6,12 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    QDir dir("../GitHub/Project-1-European-Trip-Planner/data/Cities.sqlite3");
-    QString path = dir.absolutePath();
     ui->setupUi(this);
     ui->comboBox->addItem("Select City");
     ui->comboBox_2->addItem("Select City");
-    qInfo() << path;
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(path);
 
-    db.open();
+    SetDataBase();
+    ConnOpen();
     QSqlQuery q;
     q.exec("SELECT * FROM foods"); // SQL statement: means to output all values in the table
     QString name = "";
@@ -30,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
         name = q.value(0).toString();
     }
 
-    db.close();
+    ConnClose();
 }
 
 MainWindow::~MainWindow()
@@ -40,7 +36,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    db.open();
+    ConnOpen();
     QSqlQuery q;
     QString data = "";
     q.exec("SELECT * FROM distances WHERE Ending_City = 'Rome';"); // SQL statement: means to output all values in the table where ending city is rome
@@ -55,7 +51,7 @@ void MainWindow::on_pushButton_clicked()
     ui->textEdit->setText(data);
 
     q.clear();
-    db.close();
+    ConnClose();
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -68,7 +64,7 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_comboBox_currentIndexChanged(int index)
 {
-    db.open();
+    ConnOpen();
     QSqlQuery q;
     q.exec("SELECT food, cost FROM foods WHERE City = \'" + ui->comboBox->itemText(index) + "\'"); // SQL statement: means to output all values in the table
     QString data = "";
@@ -79,13 +75,13 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
     }
     ui->textEdit_2->setText(data);
 
-    db.close();
+    ConnClose();
 }
 
 
 void MainWindow::on_comboBox_2_currentIndexChanged(int index)
 {
-    db.open();
+    ConnOpen();
     QSqlQuery q;
     q.exec("SELECT Distance FROM Distances WHERE Ending_City = 'Rome' AND Starting_City = \'" + ui->comboBox->itemText(index) + "\'"); // SQL statement: means to output all values in the table
     QString data = "";
@@ -97,6 +93,6 @@ void MainWindow::on_comboBox_2_currentIndexChanged(int index)
     }
     ui->textEdit->setText(data);
 
-    db.close();
+    ConnClose();
 }
 

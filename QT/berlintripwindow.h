@@ -18,6 +18,30 @@ class berlinTripWindow : public QMainWindow
 
 public:
     QSqlDatabase db;
+
+    void SetDataBase()
+    {
+        db = QSqlDatabase::addDatabase("QSQLITE");
+        QString path = "C:/Users/andre/Documents/GitHub/Project-1-European-Trip-Planner/QT/DB/Cities.sqlite3";
+        qInfo() << path;
+        db.setDatabaseName(path);
+
+    }
+
+    void ConnOpen()
+    {
+        if(db.open())
+        {
+            qDebug() << ("Connected.");
+
+        } else {
+
+            qDebug() << ("Not Connected.");
+        }
+    }
+
+    void ConnClose() { db.close();}
+
     explicit berlinTripWindow(QWidget *parent = nullptr);
     void FindClosestCity(const QString& city, std::vector<QString>& cities);
     bool CheckIfCityWasVisited(const QString& CITY, std::vector<QString>& visitedCities);
