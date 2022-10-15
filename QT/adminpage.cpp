@@ -105,11 +105,38 @@ void adminpage::on_pushButton_clicked()
             ConnClose();
 
             DisplayData(model, model2);
+
+           QMessageBox::information(this, "Success", "Updated entry.");
         }
         else
         {
             QMessageBox::warning(this, "Error", "Invalid input.");
         }
+
+    }
+}
+
+
+void adminpage::on_pushButton_2_clicked()
+{
+    if(ui->comboBox->currentIndex() > 0)
+    {
+        QString foodName = "";
+
+        foodName = ui->lineEdit->text();
+
+        ConnOpen();
+        QSqlQuery q;
+        QString sql = "delete from foods where Food = '"+foodName+"'";
+        qDebug() << sql;
+        q.exec(sql); // SQL statement: means to output all values in the table
+        ConnClose();
+
+        DisplayData(model, model2);
+
+        ui->comboBox->removeItem(ui->comboBox->currentIndex());
+
+        QMessageBox::information(this, "Success", "Deleted entry.");
 
     }
 }
