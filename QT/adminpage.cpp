@@ -6,10 +6,11 @@ adminpage::adminpage(QWidget *parent) :
     ui(new Ui::adminpage)
 {
     ui->setupUi(this);
+    ui->lineEdit->setEnabled(false);
     SetDataBase();
 
-    QSqlQueryModel* model = new QSqlQueryModel();
-    QSqlQueryModel* model2 = new QSqlQueryModel();
+    model = new QSqlQueryModel();
+    model2 = new QSqlQueryModel();
     DisplayData(model, model2);
 
     ui->comboBox->addItem("Select City");
@@ -29,6 +30,8 @@ adminpage::adminpage(QWidget *parent) :
 adminpage::~adminpage()
 {
     delete ui;
+    delete model;
+    delete model2;
 }
 
 void adminpage::DisplayData(QSqlQueryModel* model, QSqlQueryModel* model2)
@@ -79,5 +82,35 @@ void adminpage::on_comboBox_currentIndexChanged(int index)
 
     ui->lineEdit->setText(name);
     ui->lineEdit_2->setText(cost);
+}
+
+
+void adminpage::on_pushButton_clicked()
+{
+    if(ui->comboBox->currentIndex() > 0)
+    {
+        QString foodName = "";
+        QString foodPrice = "";
+
+        foodName = ui->lineEdit->text();
+        foodPrice = ui->lineEdit_2->text();
+
+        if(NumCheck(foodPrice))
+        {
+            ConnOpen();
+            QSqlQuery q;
+            QString sql = "update foods set cost ='"+foodPrice+"' where Food = '"+foodName+"'";
+            qDebug() << sql;
+            q.exec(sql); // SQL statement: means to output all values in the table
+            ConnClose();
+
+            DisplayData(model, model2);
+        }
+        else
+        {
+            QMessageBox::warning(this, "Error", "Invalid input.");
+        }
+
+    }
 }
 

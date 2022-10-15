@@ -5,6 +5,7 @@
 #include <QtSql/QtSql>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
+#include <QMessageBox>
 
 namespace Ui {
 class adminpage;
@@ -38,6 +39,24 @@ public:
         }
     }
 
+    bool NumCheck(QString num)
+    {
+        num.replace(QString("."), QString(""));
+        qDebug() << num;
+
+        bool ok;
+
+        num.toInt(&ok);
+        if(ok && num.size() < 4)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     void ConnClose() { db.close();}
 
     void DisplayData(QSqlQueryModel* model, QSqlQueryModel* model2);
@@ -48,8 +67,12 @@ public:
 private slots:
     void on_comboBox_currentIndexChanged(int index);
 
+    void on_pushButton_clicked();
+
 private:
     Ui::adminpage *ui;
+    QSqlQueryModel* model;
+    QSqlQueryModel* model2;
 };
 
 #endif // ADMINPAGE_H
