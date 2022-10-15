@@ -2,13 +2,14 @@
 #define SUMMARYPAGE_H
 
 #include <QDialog>
+#include "travelplan.h"
 
-struct Receipt{
-    std::vector<double> costOfItems;
-    std::vector<QString> itemsBought;
-    double cost;
-    int distanceTraveled;
-};
+//struct Receipt{
+//    std::vector<double> costOfItems;
+//    std::vector<QString> itemsBought;
+//    double cost;
+//    int distanceTraveled;
+//};
 
 namespace Ui {
 class summarypage;
@@ -20,7 +21,7 @@ class summarypage : public QDialog
 
 public:
     explicit summarypage(QWidget *parent = nullptr);
-    void GetData(Receipt currentReceipt);
+    void GetData(TravelPlan::Receipt currentReceipt);
     ~summarypage();
 
 private slots:

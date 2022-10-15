@@ -7,6 +7,7 @@
 #include <QtSql/QSqlQuery>
 #include <QVector>
 #include "summarypage.h"
+#include "travelplan.h"
 
 namespace Ui {
 class berlinTripWindow;
@@ -54,10 +55,7 @@ private slots:
 
 private:
     Ui::berlinTripWindow *ui;
-    int index;
-    Receipt currentReceipt;
-    QString cityName;
-    std::vector<QString> visitedCities;
+    TravelPlan *berlin;
     summarypage *summaryWindow;
 };
 

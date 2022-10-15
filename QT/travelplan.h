@@ -22,9 +22,9 @@ private:
      * brief Returns whether two QStrings are equal.
      */
     bool Compare(const QString& str1, const QString& str2);
-protected:
+public:
 
-    vector<string> visitedCities; /*!< Contains previosly visited cities' names. */
+    vector<QString> visitedCities; /*!< Contains previosly visited cities' names. */
     QSqlDatabase& db; /*!< Poimter to primary, shared sql database. */
     int cityIndex; /*!< Index of current city. */
     int cityCount; /*!< Number of cities in this plan. */

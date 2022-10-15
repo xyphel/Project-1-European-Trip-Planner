@@ -13,7 +13,7 @@ summarypage::~summarypage()
     delete ui;
 }
 
-void summarypage::GetData(Receipt currentReceipt)
+void summarypage::GetData(TravelPlan::Receipt currentReceipt)
 {
     QString receipt = "";
     for(int i = 0; i < currentReceipt.costOfItems.size(); i++)

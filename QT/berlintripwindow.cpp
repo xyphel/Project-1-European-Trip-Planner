@@ -9,10 +9,17 @@ berlinTripWindow::berlinTripWindow(QWidget *parent) :
     ui(new Ui::berlinTripWindow)
 {
     ui->setupUi(this);
-    index = 0;
-    currentReceipt.cost = 0;
-    currentReceipt.distanceTraveled = 0;
-    cityName = "Berlin";
+
+    SetDataBase();
+    ConnOpen();
+
+    berlin = new TravelPlan(db);
+
+    berlin->cityIndex = 0;
+    berlin->receipt.cost = 0;
+    berlin->receipt.distanceTraveled = 0;
+    berlin->currentCity = "Berlin";
+
     QFont font = ui->label->font();
     font.setBold(true);
     font.setPointSize(15);
@@ -20,11 +27,8 @@ berlinTripWindow::berlinTripWindow(QWidget *parent) :
     font.setBold(false);
     font.setPointSize(18);
     ui->label_2->setFont(font);
-    ui->label_2->setText("Welcome to " + cityName);
-    ui->label->setText(cityName);
-
-    SetDataBase();
-    ConnOpen();
+    ui->label_2->setText("Welcome to " + berlin->currentCity);
+    ui->label->setText(berlin->currentCity);
 
     QSqlQuery q;
     q.exec("SELECT food, Cost FROM foods WHERE City = 'Berlin'");
@@ -43,14 +47,15 @@ berlinTripWindow::berlinTripWindow(QWidget *parent) :
     ui->textBrowser->setText(data);
     ConnClose();
 
-    visitedCities.push_back(cityName);
-    FindClosestCity(cityName, visitedCities);
+    berlin->visitedCities.push_back(berlin->currentCity);
+    berlin->FindClosestCity(berlin->currentCity, berlin->visitedCities);
 
 }
 
 berlinTripWindow::~berlinTripWindow()
 {
     delete ui;
+    delete berlin;
 }
 
 
@@ -62,7 +67,7 @@ void berlinTripWindow::on_pushButton_2_clicked()
     QString s = "";
     QSqlQuery q;
     s = ui->comboBox->currentText();
-    currentReceipt.itemsBought.push_back(s);
+    berlin->receipt.itemsBought.push_back(s);
     string = "SELECT cost FROM foods WHERE food = \'" + s + "\'";
     q.exec(string);
     while(q.next())
@@ -70,31 +75,31 @@ void berlinTripWindow::on_pushButton_2_clicked()
         s = q.value(0).toString();
     }
 
-    currentReceipt.costOfItems.push_back(s.toDouble());
-    currentReceipt.cost += s.toDouble();
-    qInfo() << currentReceipt.cost;
+    berlin->receipt.costOfItems.push_back(s.toDouble());
+    berlin->receipt.cost += s.toDouble();
+    qInfo() << berlin->receipt.cost;
 
     ConnClose();
 }
 
 void berlinTripWindow::on_pushButton_clicked()
 {
-    if(index != 9)
+    if(berlin->cityIndex != 9)
     {
         ui->comboBox->clear();
-        index++;
+        berlin->cityIndex++;
         ui->comboBox->clear();
         ConnOpen();
         QSqlQuery q;
 
-        qInfo() << visitedCities[index];
+        qInfo() << berlin->visitedCities[berlin->cityIndex];
 
-        cityName = visitedCities[index];
+        berlin->currentCity = berlin->visitedCities[berlin->cityIndex];
 
-        ui->label->setText(cityName);
-        ui->label_2->setText("Welcome to " + cityName);
+        ui->label->setText(berlin->currentCity);
+        ui->label_2->setText("Welcome to " + berlin->currentCity);
 
-        q.exec("SELECT food, Cost FROM foods WHERE City = \'" + cityName + "\'");
+        q.exec("SELECT food, Cost FROM foods WHERE City = \'" + berlin->currentCity + "\'");
         QString data = "";
         QString dataCombo = "";
         while(q.next())
@@ -106,11 +111,11 @@ void berlinTripWindow::on_pushButton_clicked()
         }
         ui->textBrowser->setText(data);
 
-        q.exec("SELECT Distance FROM Distances WHERE Starting_City = \'" + cityName + "\' AND Ending_City = \'" + visitedCities[index-1] + "\'");
+        q.exec("SELECT Distance FROM Distances WHERE Starting_City = \'" + berlin->currentCity + "\' AND Ending_City = \'" + berlin->visitedCities[berlin->cityIndex-1] + "\'");
         while(q.next())
         {
-            currentReceipt.distanceTraveled += q.value(0).toDouble();
-            qInfo() << currentReceipt.distanceTraveled;
+            berlin->receipt.distanceTraveled += q.value(0).toDouble();
+            qInfo() << berlin->receipt.distanceTraveled;
 
         }
         ConnClose();
@@ -119,60 +124,61 @@ void berlinTripWindow::on_pushButton_clicked()
     {
         this->hide();
         summaryWindow = new summarypage(this);
-        summaryWindow->GetData(currentReceipt);
+        summaryWindow->GetData(berlin->receipt);
 
         summaryWindow->show();
     }
 
 }
-void berlinTripWindow::FindClosestCity(const QString& city, std::vector<QString> &cities)
-{
-    if(cities.size() != 10)
-    {
-        ConnOpen();
-        std::list<QString> End;
-        QSqlQuery q;
-        QString string = "SELECT Ending_City FROM Distances WHERE Starting_City = \'" + city + "\' ORDER BY Distance ASC";
-        q.exec(string);
 
-        while(q.next())
-        {
-            End.push_back(q.value(0).toString());
-        }
+//void berlinTripWindow::FindClosestCity(const QString& city, std::vector<QString> &cities)
+//{
+//    if(cities.size() != 10)
+//    {
+//        ConnOpen();
+//        std::list<QString> End;
+//        QSqlQuery q;
+//        QString string = "SELECT Ending_City FROM Distances WHERE Starting_City = \'" + city + "\' ORDER BY Distance ASC";
+//        q.exec(string);
 
-        for(; !CheckIfCityWasVisited(End.front(), cities); End.pop_front());
+//        while(q.next())
+//        {
+//            End.push_back(q.value(0).toString());
+//        }
 
-        cities.push_back(End.front());
+//        for(; !CheckIfCityWasVisited(End.front(), cities); End.pop_front());
 
-        FindClosestCity(End.front(), cities);
-    }
+//        cities.push_back(End.front());
 
-    ConnClose();
-}
+//        FindClosestCity(End.front(), cities);
+//    }
 
-bool berlinTripWindow::CheckIfCityWasVisited(const QString& CITY, std::vector<QString>& visitedCities)
-{
-    bool notVisitedYet = true;
+//    ConnClose();
+//}
 
-    for(unsigned int i = 0; i < visitedCities.size(); i++)
-    {
-        if(Compare(CITY, visitedCities[i]))
-            notVisitedYet = false;
-    }
-    return notVisitedYet;
-}
+//bool berlinTripWindow::CheckIfCityWasVisited(const QString& CITY, std::vector<QString>& visitedCities)
+//{
+//    bool notVisitedYet = true;
 
-bool Compare(const QString& str1, const QString& str2)
-{
-    // returns true if they are equal
-    if(str1.size() != str2.size())
-        return false;
+//    for(unsigned int i = 0; i < visitedCities.size(); i++)
+//    {
+//        if(Compare(CITY, visitedCities[i]))
+//            notVisitedYet = false;
+//    }
+//    return notVisitedYet;
+//}
 
-    for(int i = 0; i < str1.size(); i++)
-    {
-        if(str1[i] != str2[i])
-            return false;
-    }
-    return true;
-}
+//bool Compare(const QString& str1, const QString& str2)
+//{
+//    // returns true if they are equal
+//    if(str1.size() != str2.size())
+//        return false;
+
+//    for(int i = 0; i < str1.size(); i++)
+//    {
+//        if(str1[i] != str2[i])
+//            return false;
+//    }
+//    return true;
+//}
 
