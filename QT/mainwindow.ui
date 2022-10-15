@@ -90,8 +90,20 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuLogin">
+    <property name="title">
+     <string>Login</string>
+    </property>
+    <addaction name="actionSign_in"/>
+   </widget>
+   <addaction name="menuLogin"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionSign_in">
+   <property name="text">
+    <string>Sign in</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete loginWindow;
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -94,5 +95,12 @@ void MainWindow::on_comboBox_2_currentIndexChanged(int index)
     ui->textEdit->setText(data);
 
     ConnClose();
+}
+
+
+void MainWindow::on_actionSign_in_triggered()
+{
+    loginWindow = new loginwindow();
+    loginWindow->show();
 }
 

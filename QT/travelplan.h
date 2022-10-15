@@ -56,20 +56,6 @@ public:
     void FindClosestCity(const QString& CITY, std::vector<QString>& cities);
     bool CheckIfCityWasVisited(const QString& CITY, std::vector<QString>& visitedCities);
 
-
-
-    // Read-only properties
-//    int distanceTraveled();
-//    // Mutators include a recursive sort
-
-//    void addDestination(string city);
-//    void removeDestination(string city);
-    //void GetDatabase(); ???
-
-    // TravelPlan already owns detinations, so only
-    // SQL database handle is needed.
-    //Location findNearestDestination(QSqlDatabase* db);
-    //vector<Location> findQuickestRoute(vector<string> destinations, QSqlDatabase* db);
 };
 
 #endif // TRAVELPLAN_H

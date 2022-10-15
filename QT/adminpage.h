@@ -1,18 +1,16 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef ADMINPAGE_H
+#define ADMINPAGE_H
 
 #include <QMainWindow>
 #include <QtSql/QtSql>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
-#include "plantripwindow.h"
-#include "loginwindow.h"
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
+namespace Ui {
+class adminpage;
+}
 
-class MainWindow : public QMainWindow
+class adminpage : public QMainWindow
 {
     Q_OBJECT
 
@@ -42,24 +40,13 @@ public:
 
     void ConnClose() { db.close();}
 
-    MainWindow(QWidget *parent = nullptr);
-    void getDatabase();
-    ~MainWindow();
+    void DisplayData(QSqlQueryModel* model, QSqlQueryModel* model2);
 
-private slots:
-    void on_pushButton_clicked();
-
-    void on_pushButton_2_clicked();
-
-    void on_comboBox_currentIndexChanged(int index);
-
-    void on_comboBox_2_currentIndexChanged(int index);
-
-    void on_actionSign_in_triggered();
+    explicit adminpage(QWidget *parent = nullptr);
+    ~adminpage();
 
 private:
-    Ui::MainWindow *ui;
-    planTripWindow *tripWindow;
-    loginwindow *loginWindow;
+    Ui::adminpage *ui;
 };
-#endif // MAINWINDOW_H
+
+#endif // ADMINPAGE_H
