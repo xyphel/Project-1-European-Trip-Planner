@@ -45,6 +45,9 @@ public:
     explicit adminpage(QWidget *parent = nullptr);
     ~adminpage();
 
+private slots:
+    void on_comboBox_currentIndexChanged(int index);
+
 private:
     Ui::adminpage *ui;
 };

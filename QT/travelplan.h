@@ -7,14 +7,6 @@
 
 using namespace std;
 
-//struct Location
-//{
-//    string cityName;
-//    int distance;
-//};
-
-
-
 class TravelPlan
 {
 private:
