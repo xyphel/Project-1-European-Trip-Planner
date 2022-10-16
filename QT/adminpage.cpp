@@ -18,7 +18,7 @@ adminpage::adminpage(QWidget *parent) :
 
     ConnOpen();
     QSqlQuery q;
-    q.exec("SELECT * FROM foods"); // SQL statement: means to output all values in the table
+    q.exec("SELECT * FROM foods ORDER BY City ASC"); // SQL statement: means to output all values in the table
     QString name = "";
     while(q.next())
     {
@@ -114,7 +114,7 @@ void adminpage::on_pushButton_clicked()
 
             DisplayData(model, model2);
 
-           QMessageBox::information(this, "Success", "Updated entry.");
+            QMessageBox::information(this, "Success", "Updated entry.");
         }
         else
         {
@@ -200,6 +200,12 @@ void adminpage::on_pushButton_3_clicked()
 
     ui->lineEdit_3->setText("");
     ui->lineEdit_4->setText("");
+
+}
+
+
+void adminpage::on_pushButton_4_clicked()
+{
 
 }
 

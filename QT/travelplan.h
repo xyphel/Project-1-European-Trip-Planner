@@ -33,6 +33,7 @@ public:
     };
     QString currentCity; /*!< Name of current city. */
     Receipt receipt; /*!< This plan's receipt. */
+    Receipt cityReceipt;
 
     /*! func TravelPlan
      * brief Constructor requires a QSqlDatabase reference.

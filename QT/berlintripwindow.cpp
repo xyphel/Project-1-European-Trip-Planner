@@ -49,7 +49,8 @@ berlinTripWindow::berlinTripWindow(QWidget *parent) :
 
     berlin->visitedCities.push_back(berlin->currentCity);
     berlin->FindClosestCity(berlin->currentCity, berlin->visitedCities);
-
+    berlin->cityReceipt.cost = 0;
+    DisplayReceipt();
 }
 
 berlinTripWindow::~berlinTripWindow()
@@ -68,6 +69,7 @@ void berlinTripWindow::on_pushButton_2_clicked()
     QSqlQuery q;
     s = ui->comboBox->currentText();
     berlin->receipt.itemsBought.push_back(s);
+    berlin->cityReceipt.itemsBought.push_back(s);
     string = "SELECT cost FROM foods WHERE food = \'" + s + "\'";
     q.exec(string);
     while(q.next())
@@ -76,7 +78,12 @@ void berlinTripWindow::on_pushButton_2_clicked()
     }
 
     berlin->receipt.costOfItems.push_back(s.toDouble());
+    berlin->cityReceipt.costOfItems.push_back(s.toDouble());
+    berlin->cityReceipt.cost += s.toDouble();
     berlin->receipt.cost += s.toDouble();
+
+    DisplayReceipt();
+
     qInfo() << berlin->receipt.cost;
 
     ConnClose();
@@ -86,6 +93,11 @@ void berlinTripWindow::on_pushButton_clicked()
 {
     if(berlin->cityIndex != 9)
     {
+        berlin->cityReceipt.itemsBought.clear();
+        berlin->cityReceipt.costOfItems.clear();
+        berlin->cityReceipt.cost = 0;
+        DisplayReceipt();
+
         ui->comboBox->clear();
         berlin->cityIndex++;
         ui->comboBox->clear();
@@ -129,5 +141,18 @@ void berlinTripWindow::on_pushButton_clicked()
         summaryWindow->show();
     }
 
+}
+
+void berlinTripWindow::DisplayReceipt()
+{
+    QString receipt = "";
+    for(int i = 0; i < berlin->cityReceipt.costOfItems.size(); i++)
+    {
+        receipt += berlin->cityReceipt.itemsBought[i] + ": $" + QString::number(berlin->cityReceipt.costOfItems[i]) + "\n";
+    }
+
+    receipt += "\n\n---------------------------\nTotal cost: $" + QString::number(berlin->cityReceipt.cost);
+
+    ui->textBrowser_2->setText(receipt);
 }
 

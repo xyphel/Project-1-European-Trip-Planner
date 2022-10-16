@@ -43,6 +43,8 @@ public:
 
     void ConnClose() { db.close();}
 
+    void DisplayReceipt();
+
     explicit berlinTripWindow(QWidget *parent = nullptr);
     void FindClosestCity(const QString& city, std::vector<QString>& cities);
     bool CheckIfCityWasVisited(const QString& CITY, std::vector<QString>& visitedCities);
@@ -57,6 +59,7 @@ private:
     Ui::berlinTripWindow *ui;
     TravelPlan *berlin;
     summarypage *summaryWindow;
+    TravelPlan::Receipt cityReceipt;
 };
 
 #endif // BERLINTRIPWINDOW_H
