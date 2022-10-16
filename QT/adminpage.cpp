@@ -13,7 +13,8 @@ adminpage::adminpage(QWidget *parent) :
     model2 = new QSqlQueryModel();
     DisplayData(model, model2);
 
-    ui->comboBox->addItem("Select City");
+    ui->comboBox->addItem("Select Food item");
+    ui->comboBox_2->addItem("Select City");
 
     ConnOpen();
     QSqlQuery q;
@@ -22,7 +23,14 @@ adminpage::adminpage(QWidget *parent) :
     while(q.next())
     {
         ui->comboBox->addItem(q.value(1).toString());
-    }
+
+        if(name != q.value(0).toString())
+        {
+            name = q.value(0).toString();
+            ui->comboBox_2->addItem(name);
+        }
+
+     }
 
     ConnClose();
 }
@@ -45,7 +53,7 @@ void adminpage::DisplayData(QSqlQueryModel* model, QSqlQueryModel* model2)
     model->setQuery(*qry);
     ui->tableView->setModel(model);
 
-    qry->prepare("select * from foods");
+    qry->prepare("select * from foods ORDER BY City ASC");
     qry->exec();
 
     model2->setQuery(*qry);
@@ -139,5 +147,59 @@ void adminpage::on_pushButton_2_clicked()
         QMessageBox::information(this, "Success", "Deleted entry.");
 
     }
+}
+
+
+void adminpage::on_comboBox_2_currentIndexChanged(int index)
+{
+    if(ui->comboBox_2->currentIndex() == 0)
+    {
+        ui->lineEdit_3->setEnabled(false);
+        ui->lineEdit_4->setEnabled(false);
+        ui->pushButton_3->setEnabled(false);
+    }
+    else
+    {
+        ui->lineEdit_3->setEnabled(true);
+        ui->lineEdit_4->setEnabled(true);
+        ui->pushButton_3->setEnabled(true);
+    }
+}
+
+
+void adminpage::on_pushButton_3_clicked()
+{
+    QString foodName = "";
+    QString foodPrice = "";
+    QString cityName = "";
+
+    foodName = ui->lineEdit_3->text();
+    foodPrice = ui->lineEdit_4->text();
+
+    cityName = ui->comboBox_2->currentText();
+
+    if(NumCheck(foodPrice))
+    {
+        ConnOpen();
+        QSqlQuery q;
+        QString sql = "insert into foods (City, Food, Cost) values (\'" + cityName +"\', \'" + foodName +"\' , \'" + foodPrice + "\')";
+        qDebug() << sql;
+        q.exec(sql); // SQL statement: means to output all values in the table
+        ConnClose();
+
+        DisplayData(model, model2);
+
+        ui->comboBox->addItem(foodName);
+
+        QMessageBox::information(this, "Success", "Added entry.");
+    }
+    else
+    {
+        QMessageBox::warning(this, "Error", "Invalid input.");
+    }
+
+    ui->lineEdit_3->setText("");
+    ui->lineEdit_4->setText("");
+
 }
 
