@@ -1,0 +1,57 @@
+Amsterdam, Stockholm, 435
+Amsterdam, Vienna, 1147
+Berlin, Stockholm, 1084
+Berlin, Vienna, 640
+Brussels, Stockholm, 1564
+Brussels, Vienna, 1104
+Budapest, Stockholm, 1951
+Budapest, Vienna, 243
+Hamburg, Stockholm, 1079
+Hamburg, Vienna, 930
+Lisbon, Stockholm, 3610
+Lisbon, Vienna, 2867
+London, Stockholm, 1902
+London, Vienna, 1461
+Madrid, Stockholm, 3141
+Madrid, Vienna, 2401
+Paris, Stockholm, 1885
+Paris, Vienna, 1236
+Prague, Stockholm, 1428
+Prague, Vienna, 331
+Rome, Stockholm, 2546
+Rome, Vienna, 1120
+Stockholm, Amsterdam, 1435
+Stockholm, Berlin, 1084
+Stockholm, Brussels, 1564
+Stockholm, Budapest, 1951
+Stockholm, Hamburg, 1079
+Stockholm, Lisbon, 3610
+Stockholm, London, 1902
+Stockholm, Madrid, 3141
+Stockholm, Paris, 1885
+Stockholm, Prague, 1428
+Stockholm, Rome, 2546
+Stockholm, Vienna, 1758
+Vienna, Amsterdam, 1147
+Vienna, Berlin, 640
+Vienna, Brussels, 1104
+Vienna, Budapest, 243
+Vienna, Hamburg, 930
+Vienna, Lisbon, 2867
+Vienna, London, 1461
+Vienna, Madrid, 2401
+Vienna, Paris, 1236
+Vienna, Prague, 331
+Vienna, Rome, 1120
+Vienna, Stockholm, 1758
+
+New Food
+Stockholm		
+Raggmunk, $6.75
+Gravad lax, $13.76
+husmanskost, $7.98
+Vienna		
+Wiener Schnitzel, $4.94
+Kaiserschmarrn, $7.53
+Sachertorte, $5.85
+

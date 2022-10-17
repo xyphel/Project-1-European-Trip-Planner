@@ -5,7 +5,12 @@
 #include <QtSql/QtSql>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
+#include <QTextStream>
+#include <QFile>
+#include <QRegularExpression>
+#include <QFileDialog>
 #include <QMessageBox>
+
 
 namespace Ui {
 class adminpage;
@@ -76,6 +81,8 @@ private slots:
     void on_pushButton_3_clicked();
 
     void on_pushButton_4_clicked();
+
+    void AddFromFile(QTextStream& iFile);
 
 private:
     Ui::adminpage *ui;

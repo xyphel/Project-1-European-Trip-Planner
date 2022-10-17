@@ -1,6 +1,7 @@
 #include "adminpage.h"
 #include "ui_adminpage.h"
 
+
 adminpage::adminpage(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::adminpage)
@@ -205,6 +206,23 @@ void adminpage::on_pushButton_3_clicked()
 
 
 void adminpage::on_pushButton_4_clicked()
+{
+    QString filePath = QFileDialog::getOpenFileName(this,"European Trip Planner - Open File",QDir::homePath(),"Text Files (*.txt)");
+
+    QFile file(filePath);
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QTextStream iFile(&file);
+
+        AddFromFile(iFile);
+    }
+    else
+    {
+        QMessageBox::warning(this, "Error", "Failed to open file.");
+    }
+}
+
+void adminpage::AddFromFile(QTextStream& iFile)
 {
 
 }
