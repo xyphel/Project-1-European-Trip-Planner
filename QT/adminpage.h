@@ -10,6 +10,7 @@
 #include <QRegularExpression>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QStringList>
 
 
 namespace Ui {
@@ -52,7 +53,7 @@ public:
         bool ok;
 
         num.toInt(&ok);
-        if(ok && num.size() < 4)
+        if(ok)
         {
             return true;
         }

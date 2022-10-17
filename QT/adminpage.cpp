@@ -48,7 +48,7 @@ void adminpage::DisplayData(QSqlQueryModel* model, QSqlQueryModel* model2)
     ConnOpen();
     QSqlQuery* qry = new QSqlQuery(db);
 
-    qry->prepare("select * from distances");
+    qry->prepare("select * from distances ORDER BY Starting_City ASC");
     qry->exec();
 
     model->setQuery(*qry);
@@ -215,6 +215,8 @@ void adminpage::on_pushButton_4_clicked()
         QTextStream iFile(&file);
 
         AddFromFile(iFile);
+
+        file.close();
     }
     else
     {
@@ -224,6 +226,77 @@ void adminpage::on_pushButton_4_clicked()
 
 void adminpage::AddFromFile(QTextStream& iFile)
 {
+    QStringList fields;
+    QString line;
 
+    QSqlQuery q;
+    QString sql = "";
+    bool food = false;
+    QString cityName;
+
+    ConnOpen();
+
+    while(!iFile.atEnd())
+    {
+        line = iFile.readLine();
+        if(line != "New Food" && !food)
+        {
+            fields.append(line.split(' '));
+            sql = "insert into distances (Starting_City, Ending_City, Distance) values (\'" + fields.at(0) + "\', \'" + fields.at(1) + "\', \'" + fields.at(2) + "\')";
+            q.exec(sql);
+            fields.clear();
+        }
+        else
+        {
+            food = true;
+
+            if(line == "New Food")
+            {
+                iFile.readLine();
+                line = iFile.readLine();
+                cityName = line;
+            }
+            else if(line == "")
+            {
+                iFile.readLine();
+            }
+            else
+            {
+                fields.append(line.split('$'));
+                sql = "insert into foods (City, Food, Cost) values (\'" + cityName + "\', \'" + fields.at(0) + "\', \'" + fields.at(1) + "\')";
+                q.exec(sql);
+                fields.clear();
+            }
+
+        }
+
+    }
+
+    ConnClose();
+
+    DisplayData(model, model2);
+
+    ui->comboBox->clear();
+    ui->comboBox_2->clear();
+
+    ui->comboBox->addItem("Select Food item");
+    ui->comboBox_2->addItem("Select City");
+
+    ConnOpen();
+    q.exec("SELECT * FROM foods ORDER BY City ASC"); // SQL statement: means to output all values in the table
+    QString name = "";
+    while(q.next())
+    {
+        ui->comboBox->addItem(q.value(1).toString());
+
+        if(name != q.value(0).toString())
+        {
+            name = q.value(0).toString();
+            ui->comboBox_2->addItem(name);
+        }
+
+     }
+
+    ConnClose();
 }
 

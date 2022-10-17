@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     SetDataBase();
     ConnOpen();
     QSqlQuery q;
-    q.exec("SELECT * FROM foods"); // SQL statement: means to output all values in the table
+    q.exec("SELECT * FROM foods ORDER BY City ASC"); // SQL statement: means to output all values in the table
     QString name = "";
     while(q.next())
     {
@@ -22,9 +22,11 @@ MainWindow::MainWindow(QWidget *parent)
             ui->comboBox->addItem(q.value(0).toString());
             ui->comboBox_2->addItem(q.value(0).toString());
         }
-        ui->comboBox_2->removeItem(11);
+
         name = q.value(0).toString();
     }
+
+    ui->comboBox_2->removeItem(11);
 
     ConnClose();
 }
@@ -84,11 +86,11 @@ void MainWindow::on_comboBox_2_currentIndexChanged(int index)
 {
     ConnOpen();
     QSqlQuery q;
-    q.exec("SELECT Distance FROM Distances WHERE Ending_City = 'Rome' AND Starting_City = \'" + ui->comboBox->itemText(index) + "\'"); // SQL statement: means to output all values in the table
+    q.exec("SELECT Distance FROM Distances WHERE Ending_City = 'Rome' AND Starting_City = \'" + ui->comboBox_2->itemText(index) + "\'"); // SQL statement: means to output all values in the table
     QString data = "";
     while(q.next())
     {
-        data = "Distance from " + ui->comboBox->itemText(index) + " to Rome is ";
+        data = "Distance from " + ui->comboBox_2->itemText(index) + " to Rome is ";
         data += q.value(0).toString() + "km";
 
     }
