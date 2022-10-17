@@ -1,0 +1,26 @@
+<!-- Site 1 -->
+<!doctype html>
+<html>
+<main>
+  <head></head>
+  <body>
+  <h1>Your adventure awaits</h1>
+  <button onpointerdown="newPlan()"></button>
+  <div></div>
+  <div id="template-list">
+    <button onpointerdown="bostonPlan()"></button>
+    <button onpointerdown="parisPlan()"></button>
+  </div>
+  
+  <template id="t-plan-titlecard">
+    <div class="plan-titlecard">
+      <h2 class="plan-card-name"></h2>
+      <img class="plan-card-image" loading="lazy">
+      <div class="plan-card-description"></div>
+    </div>
+    
+  </template>
+
+</main>
+</body>
+</html>
