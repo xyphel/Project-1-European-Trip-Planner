@@ -1,4 +1,4 @@
-const dataRemotePath = "https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/QT/QT/DB";
+const dataRemotePath = "https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main";
 const initSqlJs = window.initSqlJs;
 // Database holding both location distances and foods
 let destination_DB;
@@ -11,9 +11,9 @@ let plan_DB;
 async function createDatabase()
 {
   let databaseObject;
-  const data_promise = fetch(`${dataRemotePath}/Cities.sqlite3`).then((response) => response.arrayBuffer());
+  const data_promise = fetch(`${dataRemotePath}/data/Cities.sqlite3`).then((response) => response.arrayBuffer());
   const sql_promise = await initSqlJs({
-    locateFile: file => `/dist/${file}`
+    locateFile: file => `${dataRemotePath}/dist/${file}`
   });
   const [SQL, data_buffer] = await Promise.all([sql_promise, data_promise]);
   
