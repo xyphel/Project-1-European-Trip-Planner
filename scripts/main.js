@@ -44,7 +44,7 @@ async function init()
 {
   // Ensure database exists
   createDatabase();
-  // Ensure global state exists
+  // Ensure persistent state exists
   local_state.forEach(state_key =>
   {
     if(local_storage.getItem(state_key) == null)
@@ -52,6 +52,10 @@ async function init()
       local_storage.setItem(state_key, "false")
     }
   });
+  if(local_storage.getItem("target_plan") == null)
+  {
+    local_storage.setItem("target_plan", "false");
+  }
 }
 
 // Runs after DOM is finished loading
