@@ -1,4 +1,4 @@
-const pageRemotePath = "./sites";//"https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main/sites"
+const pageRemotePath = "https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/dev-webtemplate/sites";
 
 let page_content;
 
@@ -16,16 +16,21 @@ function loadHTML( page_name )
     fetch(`${pageRemotePath}/${page_name}.html`).then(
         (response) => 
         {
+            console.log(response);
             response.text();
         }).then(
         (htmlString) =>
         {
             let parser = new DOMParser();
-            let html = parser.parseFromString(htmlString, "text/html");
-            return html.body;
+            console.log(htmlString);
+            parser.parseFromString(htmlString, "text/html");
+            
         }
         // catching possible exceptions
-        ).catch(console.error);
+        ).then((html) => {
+            console.log(html);
+            document.getElementsByTagName("main").replaceWith( html.body );
+        }).catch(console.error);
 }
 
 function pageAppSettings()
@@ -80,8 +85,12 @@ params:
 */
 function loadPage( page_name )
 {
-    page_content.replaceWith( loadHTML(page_name) );
-    page_content = document.querySelector("main");
+    page_content = document.getElementsByTagName("main");
+    console.log(`Loading ${page_name}`);
+    loadHTML(page_name);
+    //page_content.replaceWith( loadHTML(page_name) );
+
+
     switch (page_name)
     {
         case "appSettings":
@@ -101,6 +110,6 @@ function loadPage( page_name )
             console.error(`Sorry, page ${page_name} does not yet exist!`)
     }
 }
-window.addEventListener("load", (e) => page_content = document.querySelector("main"), true);
+window.addEventListener("load", (e) => page_content = document.getElementsByTagName("main"), true);
 
 export { loadPage };

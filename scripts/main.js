@@ -12,8 +12,8 @@ import {
 
 
 // Global State
-let persistent_storage = window.localStorage;
-const persistent_state = [
+let local_storage = window.localStorage;
+const local_state = [
   "is_admin",        // modify cities/foods
   "is_plan_active",   // jump to active plan
   "is_plan_complete", // jump to plan record
@@ -45,11 +45,11 @@ async function init()
   // Ensure database exists
   createDatabase();
   // Ensure global state exists
-  persistent_state.forEach(state_key =>
+  local_state.forEach(state_key =>
   {
-    if(persistent_storage.getItem(state_key) == null)
+    if(local_storage.getItem(state_key) == null)
     {
-      persistent_storage.setItem(state_key, "false")
+      local_storage.setItem(state_key, "false")
     }
   });
 }
@@ -63,15 +63,15 @@ function main()
   const nav_create = document.querySelector("#nav-create");
 
   // Select landing page based on global state
-  if(persistent_storage.getItem("is_plan_active") == true)
+  if(local_storage.getItem("is_plan_active") == "true")
   {
     loadPage("tripViewer");
   }
-  else if( persistent_storage.getItem("is_plan_completed") == true )
+  else if( local_storage.getItem("is_plan_completed") == "true" )
   {
     loadPage("tripRecord");
   }
-  else if( persistent_storage.getItem("is_plan_drafted") == true )
+  else if( local_storage.getItem("is_plan_drafted") == "true" )
   {
     loadPage("tripCustomizer");
   }
@@ -79,7 +79,7 @@ function main()
   {
     loadPage("tripSelector");
   }
-  loadPage("appSettings");
+  //loadPage("appSettings");
 
   /*
   // replace "remotePath" with "localPath" for local testing
