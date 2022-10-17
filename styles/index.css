@@ -8,7 +8,6 @@ html, body {
 #tempDisplay {
     width: 90vw;
     height: 90vh;
-<<<<<<< HEAD
 }
 #nav-container {
     position: fixed;
@@ -47,6 +46,4 @@ html, body {
     position: relative;
     bottom: -80%;
     width:max-content;
-=======
->>>>>>> main
 }

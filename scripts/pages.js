@@ -1,4 +1,4 @@
-const pageRemotePath = "https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/dev-webtemplate/sites";
+const pageRemotePath = "https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main/sites";
 
 let page_content;
 
