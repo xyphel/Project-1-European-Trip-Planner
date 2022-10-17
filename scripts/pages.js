@@ -13,7 +13,12 @@ function helperCreateTitleCards()
 
 function loadHTML( page_name )
 {
-    fetch(`${pageRemotePath}/${page_name}.html`).then(
+    fetch(`${pageRemotePath}/${page_name}.html`,
+    {
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache"
+    }).then(
         (response) => 
         {
             console.log(response);

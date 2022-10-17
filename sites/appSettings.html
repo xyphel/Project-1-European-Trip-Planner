@@ -2,19 +2,40 @@
 <main>
   
   <h1>Advanced Configuration</h1>
+  <input type="search" name="dbSearch" list="dbEntries">
+  <datalist id="dbEntries">
+    <option value="All Cities"></option>
+    <option value="Berlin"></option>
+  </datalist>
   <div class="database-container">
-    <h2>Distances DB</h2>
+    <h3>Distances DB</h3>
     <textarea id="database-distances"></textarea>
   </div>
   <div class="database-container">
-    <h2>Foods DB</h2>
+    <h3>Foods DB</h3>
     <textarea id="database-foods"></textarea>
   </div>
   <div>
-    <h2>Destinations DB</h2>
+    <h3>Destinations DB</h3>
     <textarea id="database-distances"></textarea>
   </div>
   
+  <h2>Administrator</h2>
+  <form id="admin-credentials" action="" style="display: none;">
+    <input type="text" placeholder="Username"><br>
+    <input type="password" placeholder="Password"><br>
+    <input type="submit" value="Login">
+  </form>
+  <div id="admin-controls">
+    <p>Warning: Changes made to database will persist.</p>
+    <!--form> Stretcb goal: improve look
+      <input type="radio">
+    </form-->
+    <select
+    <p>Import cities from a file:</p>
+    <input type="file">
+  </div>
+
   <template id="t-plan-titlecard">
     <div class="plan-titlecard">
       <h2 class="plan-card-name"></h2>

@@ -6,10 +6,11 @@
   <meta http-equiv="expires" content="-1">
   <!-- ^^^^^^ -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
   <title>European Travel Planner</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="./styles/index.css"></link>
-  <script src="https://sql.js.org/dist/sql-wasm.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="./dist/sql.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="module" src="./scripts/database.js"></script>
   <script type="module" src="./scripts/pages.js"></script>
   <script type="module" src="./scripts/main.js"></script>
@@ -18,9 +19,9 @@
   <!-- Navigation menu -->
   <nav id="nav-container">
     <img href="#">
-    <a id="nav-settings" class="nav-item" href="#" data="./sites/appSettings.html">Advanced</a>
-    <a id="nav-home" class="nav-item" href="#" data="./sites/tripViewer.html">My Plan</a>
-    <a id="nav-create" class="nav-item" href="#" data="./sites/tripSelector.html">New Plan</a>
+    <a id="nav-advanced" class="nav-item" href="#" data="./sites/appSettings.html"><img src="../assets/nav-advanced.png" alt="Advanced"></a>
+    <a id="nav-home" class="nav-item" href="#" data="./sites/tripViewer.html"><img class="nav-selected" src="../assets/nav-home.png" alt="My Plan"></a>
+    <a id="nav-create" class="nav-item" href="#" data="./sites/tripSelector.html"><img src="../assets/nav-create.png" alt="New Plan"></a>
     <!--div id="nav-background"></div-->
   </nav>
   <!-- Main page content -->

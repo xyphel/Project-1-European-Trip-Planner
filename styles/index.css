@@ -1,7 +1,7 @@
 html, body {
     padding: 0;
     margin: 0;
-    background-color: rgb(62, 165, 255);
+    background-color: rgb(0, 106, 255);
 }
 
 /* A temporary HTML demonstration of data */
@@ -13,9 +13,10 @@ html, body {
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 10%;
+    height: 15%;
     text-align: center;
-    background-color: rgb(180, 228, 255);
+    /*padding-bottom: 2em;*/
+    background-color: rgb(62, 165, 255);
     /* Streatch goal: smooth animations and 
     background-image: linear-gradient(
         0deg,
@@ -26,7 +27,7 @@ html, body {
     );
     */
 }
-#nav-settings {
+#nav-advanced {
 
 }
 #nav-home {
@@ -35,15 +36,23 @@ html, body {
 #nav-create {
 
 }
-#nav-background {
-    position: float;
-    width: 100%;
-    height: 80%;
-    background-color: ;
-}
 
+.nav-selected {
+    overflow: visible;
+    background-image: radial-gradient(
+        rgb(0, 32, 129) 75%,
+        rgb(62, 165, 255) 75%
+    );
+}
 .nav-item {
     position: relative;
-    bottom: -80%;
+    aspect-ratio: 1;
     width:max-content;
+}
+.nav-item > img {
+    height: 80%;
+}
+main {
+    padding-left: 1em;
+    padding-right: 1em;
 }

@@ -1,0 +1,12 @@
+{
+    "Stockholm":{
+        "Raggmunk": 6.75,
+        "Gravad lax": 13.76,
+        "husmanskost": 7.98
+    },
+    "Vienna":{
+        "Wiener Schnitzel": 4.94,
+        "Kaiserschmarrn": 7.53,
+        "Sachertorte": 5.85
+    }
+}
