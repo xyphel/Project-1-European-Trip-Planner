@@ -8,9 +8,9 @@ const password = document.getElementById('password');
 function whenSubmit(){
 
     if(password.value === 'admin' && username.value === 'admin'){
-        document.location.href='admin.html';
+        document.location.href='index.html';
     }else if(password.value == 'user' && username.value === 'user'){
-        document.location.href='user.html';
+        document.location.href='form/user.html';
     }else{
         //alert("Incorrect Input");
     }

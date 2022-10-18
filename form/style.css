@@ -8,7 +8,15 @@
   }
   
   body {
-    background-color: #f9fafb;
+    background-color: #F0B27A;
+
+
+    /*#F0B27A*/
+
+   /* #f9fafb*/
+
+
+
     font-family: 'Open Sans', sans-serif;
     display: flex;
     align-items: center;
@@ -81,8 +89,8 @@
   
   .form button {
     cursor: pointer;
-    background-color: #3498db;
-    border: 2px solid #3498db;
+    background-color: #F05F44;
+    border: 2px solid #F05F44;
     border-radius: 4px;
     color: #fff;
     display: block;
