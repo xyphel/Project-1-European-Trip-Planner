@@ -52,14 +52,14 @@ html, body {
 .nav-item > img {
     height: 80%;
 }
-.nav-item:hover:not(:active) > img {
+.nav-item:active > img {
     overflow: visible;
     background-image: radial-gradient(
         rgba(0, 32, 129, 0.204) 75%,
         rgb(62, 165, 255) 75%
     );
 }
-.nav-item:target > img {
+.nav-item:hover > img {
     overflow: visible;
     background-image: radial-gradient(
         rgb(0, 32, 129) 75%,
