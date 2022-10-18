@@ -6,11 +6,16 @@ planTripWindow::planTripWindow(QWidget *parent) :
     ui(new Ui::planTripWindow)
 {
     ui->setupUi(this);
+    loginWindow = new loginwindow();
+
+    SetDataBase();
 }
 
 planTripWindow::~planTripWindow()
 {
     delete ui;
+    delete loginWindow;
+    delete berlinPlanWindow;
 }
 
 void planTripWindow::on_pushButton_clicked()
@@ -20,3 +25,47 @@ void planTripWindow::on_pushButton_clicked()
     berlinPlanWindow->show();
     this->hide();
 }
+
+void planTripWindow::on_actionSign_in_triggered()
+{
+    loginWindow->show();
+
+}
+
+
+void planTripWindow::on_pushButton_2_clicked()
+{
+    ConnOpen();
+    QSqlQuery q;
+    q.exec("SELECT DISTINCT Starting_City FROM Distances WHERE Starting_City = 'Vienna' OR Starting_City = 'Stockholm'"); // SQL statement: means to output all values in the table
+    bool dataInserted = false;
+    while(q.next())
+    {
+        if(!(q.value(0).isNull()))
+        {
+            dataInserted = true;
+        }
+        else
+        {
+            dataInserted = false;
+        }
+
+    }
+
+    ConnClose();
+
+    if(dataInserted)
+    {
+        newBerlinPlanWindow = new newberlinwindow(this);
+
+        newBerlinPlanWindow->show();
+        this->hide();
+    }
+    else
+    {
+        QMessageBox::warning(this, "Error", "Data not inserted.");
+        loginWindow->show();
+    }
+
+}
+

@@ -46,8 +46,6 @@ public:
     void DisplayReceipt();
 
     explicit berlinTripWindow(QWidget *parent = nullptr);
-    void FindClosestCity(const QString& city, std::vector<QString>& cities);
-    bool CheckIfCityWasVisited(const QString& CITY, std::vector<QString>& visitedCities);
     ~berlinTripWindow();
 
 private slots:
@@ -55,7 +53,7 @@ private slots:
 
     void on_pushButton_2_clicked();
 
-private:
+protected:
     Ui::berlinTripWindow *ui;
     TravelPlan *berlin;
     summarypage *summaryWindow;
