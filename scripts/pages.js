@@ -28,13 +28,14 @@ function loadHTML( page_name )
         {
             let parser = new DOMParser();
             console.log(htmlString);
-            parser.parseFromString(htmlString, "text/html");
+            document.getElementsByTagName("main").innerHTML = htmlString;
+            //parser.parseFromString("<main><div>Hi<br></div></main>", "text/html");
             
-        }
+        //}
         // catching possible exceptions
-        ).then((html) => {
-            console.log(html);
-            document.getElementsByTagName("main").replaceWith( html.body );
+        //).then((html) => {
+            //console.log(html);
+            
         }).catch(console.error);
 }
 
@@ -45,7 +46,7 @@ function pageAppSettings()
     // After HTML is fully parsed
     page_content.onload = () =>
     {
-        if(window.localStorage.getItem("is_admin") == "true")
+        if(window.localStorage.getItem("is_admin") === "true")
         {
             document.getElementById("admin-container").style.display = "inline";
         }
@@ -90,7 +91,7 @@ params:
 */
 function loadPage( page_name )
 {
-    page_content = document.getElementsByTagName("main");
+    page_content = document.getElementById("main");
     console.log(`Loading ${page_name}`);
     loadHTML(page_name);
     //page_content.replaceWith( loadHTML(page_name) );

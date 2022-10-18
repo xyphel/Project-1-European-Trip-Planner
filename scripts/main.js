@@ -67,21 +67,21 @@ function main()
   const nav_create = document.querySelector("#nav-create");
 
   // Select landing page based on global state
-  if(local_storage.getItem("is_plan_active") == "true")
+  if(local_storage.getItem("is_plan_active") === "true")
   {
     loadPage("tripViewer");
   }
-  else if( local_storage.getItem("is_plan_completed") == "true" )
+  else if( local_storage.getItem("is_plan_completed") === "true" )
   {
     loadPage("tripRecord");
   }
-  else if( local_storage.getItem("is_plan_drafted") == "true" )
+  else if( local_storage.getItem("is_plan_drafted") === "true" )
   {
     loadPage("tripCustomizer");
   }
   else
   {
-    loadPage("tripSelector");
+    loadPage("appSettings");
   }
   //loadPage("appSettings");
 
