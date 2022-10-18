@@ -16,6 +16,7 @@ planTripWindow::~planTripWindow()
     delete ui;
     delete loginWindow;
     delete berlinPlanWindow;
+    delete parisInput;
 }
 
 void planTripWindow::on_pushButton_clicked()
@@ -34,6 +35,35 @@ void planTripWindow::on_actionSign_in_triggered()
 
 
 void planTripWindow::on_pushButton_2_clicked()
+{
+    bool dataInserted = CheckCitiesAdded();
+
+    if(dataInserted)
+    {
+        newBerlinPlanWindow = new newberlinwindow(this);
+
+        newBerlinPlanWindow->show();
+        this->hide();
+    }
+    else
+    {
+        QMessageBox::warning(this, "Error", "Data not inserted.");
+        loginWindow->show();
+    }
+
+}
+
+
+void planTripWindow::on_pushButton_3_clicked()
+{
+    parisInput = new parisinput(this);
+
+    parisInput->SetCheckCities(CheckCitiesAdded());
+    parisInput->show();
+
+}
+
+bool planTripWindow::CheckCitiesAdded()
 {
     ConnOpen();
     QSqlQuery q;
@@ -54,18 +84,6 @@ void planTripWindow::on_pushButton_2_clicked()
 
     ConnClose();
 
-    if(dataInserted)
-    {
-        newBerlinPlanWindow = new newberlinwindow(this);
-
-        newBerlinPlanWindow->show();
-        this->hide();
-    }
-    else
-    {
-        QMessageBox::warning(this, "Error", "Data not inserted.");
-        loginWindow->show();
-    }
-
+    return dataInserted;
 }
 

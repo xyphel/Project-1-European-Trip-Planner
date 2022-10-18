@@ -5,6 +5,7 @@
 #include "berlintripwindow.h"
 #include "loginwindow.h"
 #include "newberlinwindow.h"
+#include "parisinput.h"
 
 namespace Ui {
 class planTripWindow;
@@ -40,6 +41,8 @@ public:
 
     void ConnClose() { db.close();}
 
+    bool CheckCitiesAdded();
+
     explicit planTripWindow(QWidget *parent = nullptr);
     ~planTripWindow();
 
@@ -50,11 +53,14 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_pushButton_3_clicked();
+
 private:
     Ui::planTripWindow *ui;
     berlinTripWindow *berlinPlanWindow;
     newberlinwindow *newBerlinPlanWindow;
     loginwindow *loginWindow;
+    parisinput *parisInput;
 };
 
 #endif // PLANTRIPWINDOW_H

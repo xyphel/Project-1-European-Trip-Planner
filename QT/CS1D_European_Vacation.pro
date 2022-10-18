@@ -17,6 +17,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     newberlinwindow.cpp \
+    parisinput.cpp \
     pariswindow.cpp \
     plantripwindow.cpp \
     summarypage.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
     loginwindow.h \
     mainwindow.h \
     newberlinwindow.h \
+    parisinput.h \
     pariswindow.h \
     plantripwindow.h \
     summarypage.h \
@@ -39,6 +41,7 @@ FORMS += \
     loginwindow.ui \
     mainwindow.ui \
     newberlinwindow.ui \
+    parisinput.ui \
     pariswindow.ui \
     plantripwindow.ui \
     summarypage.ui
