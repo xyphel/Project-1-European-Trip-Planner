@@ -1,6 +1,6 @@
 // index.js
 // Function Dependencies
-import { loadPage } from "./pages.js";
+import { loadPage } from "./_pages.js";
 import {
   createDatabase,
   listDistances, listFoods, listCities, listPlans,
@@ -8,7 +8,7 @@ import {
   addDistance, addFood, delDistance, delFood, delCity, modDistance, modFoodCost,
   parseDistanceFile, parseFoodFile,
   addPlan, delPlan, modPlanName, addCityToPlan, removeCityFromPlan
-} from "./database.js";
+} from "./_database.js";
 
 
 // Global State

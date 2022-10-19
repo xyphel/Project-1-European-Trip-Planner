@@ -1,0 +1,70 @@
+{
+    "Amsterdam":{
+        "Stockholm": ,
+        "Vienna": 
+    },
+    "Berlin":{
+        "Stockholm": ,
+        "Vienna": 
+    },
+    "Brussels":{
+        "Stockholm": ,
+        "Vienna": 
+    },
+    "Budapest":{
+        "Stockholm": ,
+        "Vienna": 
+    },
+    "Hamburg":{
+        "Stockholm": ,
+        "Vienna": 
+    },
+    "Lisbon":{
+        "Stockholm": ,
+        "Vienna": 
+    },
+    "London":{
+        "Stockholm": ,
+        "Vienna": 
+    },
+    "Madrid":{
+        "Stockholm": ,
+        "Vienna": 
+    },
+    "Paris":{
+        "Stockholm": ,
+        "Vienna": 
+    },
+    "Prague":{
+        "Stockholm": ,
+        "Vienna": 
+    },
+    "Rome":{
+        "Stockholm": ,
+        "Vienna": 
+    },
+    "Stockholm":{
+        "Hamburg": 1079,
+        "Lisbon": 3610,
+        "London": 1902,
+        "Madrid": 3141,
+        "Paris": 1885,
+        "Prague": 1428,
+        "Rome": 2546,
+        "Vienna": 1758
+    },
+    "Vienna":{
+        "Amsterdam": ,
+        "Berlin": ,
+        "Brussels": ,
+        "Budapest": ,
+        "Hamburg": ,
+        "Lisbon": ,
+        "London": ,
+        "Madrid": ,
+        "Paris": ,
+        "Prague": ,
+        "Rome": ,
+        "Stockholm": 
+        }
+}

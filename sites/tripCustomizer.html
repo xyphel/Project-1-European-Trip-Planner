@@ -1,4 +1,32 @@
 <!-- Site 2 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- The following ensures site changes update on client side -->
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="expires" content="-1">
+  <!-- ^^^^^^ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>Customizer</title>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../styles/index.css"></link>
+  <link rel="stylesheet" href="../styles/tripCustomizer.css"></link>
+  <script type="module" src="../scripts/SQLim.js"></script>
+  <script type="module" src="../scripts/database.js"></script>
+  <script type="module" src="../scripts/sites/appSettings.js"></script>
+  
+</head>
+<body>
+  <!-- Navigation menu -->
+  <nav id="nav-container">
+    <a id="nav-advanced" class="nav-item" href="#" data="./appSettings.html"><img draggable="false" src="https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main/assets/nav-advanced.png" alt="Advanced"></a>
+    <a id="nav-home" class="nav-item" href="#" data="./tripViewer.html"><img class="nav-selected" draggable="false" src="https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main/assets/nav-home.png" alt="My Plan"></a>
+    <a id="nav-create" class="nav-item" href="#" data="./tripSelector.html"><img draggable="false" src="https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main/assets/nav-create.png" alt="New Plan"></a>
+    <!--div id="nav-background"></div-->
+  </nav>
+  <!----------------------->
+  <!-- Main page content -->
 <main>
   
   <h1 id="plan-name">My Plan</h1>
@@ -22,3 +50,6 @@
   </template>
   
 </main>
+  <!----------------------->
+</body>
+</html>

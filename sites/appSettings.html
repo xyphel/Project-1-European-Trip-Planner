@@ -1,22 +1,46 @@
 <!-- Site 0 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- The following ensures site changes update on client side -->
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="expires" content="-1">
+  <!-- ^^^^^^ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>Settings</title>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../styles/index.css"></link>
+  <link rel="stylesheet" href="../styles/appSettings.css"></link>
+  <script type="module" src="../scripts/SQLim.js"></script>
+  <script type="module" src="../scripts/database.js"></script>
+  <script type="module" src="../scripts/sites/appSettings.js"></script>
+  
+</head>
+<body>
+  <!-- Navigation menu -->
+  <nav id="nav-container">
+    <a id="nav-advanced" class="nav-item" href="#" data="./appSettings.html"><img draggable="false" src="https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main/assets/nav-advanced.png" alt="Advanced"></a>
+    <a id="nav-home" class="nav-item" href="#" data="./tripViewer.html"><img class="nav-selected" draggable="false" src="https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main/assets/nav-home.png" alt="My Plan"></a>
+    <a id="nav-create" class="nav-item" href="#" data="./tripSelector.html"><img draggable="false" src="https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main/assets/nav-create.png" alt="New Plan"></a>
+    <!--div id="nav-background"></div-->
+  </nav>
+  <!----------------------->
+  <!-- Main page content -->
 <main>
   
-  <h1>Advanced Configuration</h1>
-  <input type="search" name="dbSearch" list="dbEntries">
-  <datalist id="dbEntries">
-    <option value="All Cities"></option>
-    <option value="Berlin"></option>
-  </datalist>
-  <div class="database-container">
-    <h3>Distances DB</h3>
-    <textarea id="database-distances"></textarea>
+  <h1>Settings</h1>
+  <div class="dialogue">
+    <input id="in-search" class="button" type="search" name="dbSearch" list="dbEntries" placeholder="Search for a database">
+    <datalist id="dbEntries">
+      <option value="All Cities"></option>
+      <option value="Berlin"></option>
+    </datalist>
   </div>
+  <input type="reset" value="Done" for>
+
   <div class="database-container">
-    <h3>Foods DB</h3>
-    <textarea id="database-foods"></textarea>
-  </div>
-  <div>
-    <h3>Destinations DB</h3>
+    <h3>Distances Database</h3>
     <textarea id="database-distances"></textarea>
   </div>
   
@@ -32,8 +56,11 @@
       <input type="radio">
     </form-->
     <select></select>
-    <p>Import cities from a file:</p>
-    <input type="file">
+    <!-- Previews are made into DB preview above -->
+    <label>Import data from a file:</label>
+    <input type="file" onchange="previewJSONasDB()">
+    <label>Reset databases:</label>
+    <input type="button" onclick="resetDB()">
   </div>
 
   <template id="t-plan-titlecard">
@@ -46,3 +73,6 @@
   </template>
   
 </main>
+  <!----------------------->
+</body>
+</html>

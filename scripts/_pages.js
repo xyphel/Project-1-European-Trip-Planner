@@ -29,13 +29,13 @@ function loadHTML( page_name )
             let parser = new DOMParser();
             console.log(htmlString);
             document.getElementsByTagName("main").innerHTML = htmlString;
-            //parser.parseFromString("<main><div>Hi<br></div></main>", "text/html");
+            parser.parseFromString("<main><div>Hi<br></div></main>", "text/html");
             
-        //}
+        }
         // catching possible exceptions
-        //).then((html) => {
-            //console.log(html);
-            
+        ).then((html) => {
+            console.log(html);
+            document.body.replaceChildren
         }).catch(console.error);
 }
 

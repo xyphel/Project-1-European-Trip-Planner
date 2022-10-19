@@ -1,3 +1,9 @@
+:root {
+    --chart-diameter: 200pix;
+    --chart-progress: 40;
+    --chart-border: 3vw;
+}
+
 html, body {
     padding: 0;
     margin: 0;
@@ -9,6 +15,7 @@ html, body {
     width: 90vw;
     height: 90vh;
 }
+/*** Navigation Bar ***/
 #nav-container {
     position: fixed;
     bottom: 0;
@@ -70,4 +77,50 @@ html, body {
 main {
     padding-left: 1em;
     padding-right: 1em;
+}
+
+/*** UI Elements ***/
+div.dialogue {
+    border-radius: 25px;
+    background-color: rgb(0, 136, 255);
+}
+input.button {
+    border-radius: 25px;
+    background-color: rgb(0, 183, 255);
+}
+input.dropdown > form {
+    display: none;
+}
+input.dropdown:checked > form {
+    display: contents;
+}
+div#progress-chart {
+    
+    aspect-ratio: 1;
+    width: var(--chart-diameter);
+    display: inline-grid;
+    place-content: center;
+}
+div#progress-chart::before {
+    aspect-ratio: 1;
+    width: var(--chart-diameter);
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+        radial-gradient(farthest-side,rgb(112, 243, 255) 100%,#0000) top/var(--chart-border) var(--chart-border) no-repeat,
+        conic-gradient(rgb(112, 243, 255) calc(var(--chart-progress)*1%),rgb(0, 32, 129) 0);
+    -webkit-mask:radial-gradient(farthest-side,#0000 calc(100% - var(--chart-border)),#000 calc(100% - var(--chart-border)));
+          mask:radial-gradient(farthest-side,#0000 calc(100% - var(--chart-border)),#000 calc(100% - var(--chart-border)));
+}
+div#progress-chart::after {
+    aspect-ratio: 1;
+    width: var(--chart-diameter);
+    content: "";
+    position: absolute;
+    inset: calc(50% - var(--chart-border)/2);
+    border-radius: 50%;
+    background: rgb(112, 243, 255);
+    transform: rotate(calc(var(--chart-progressp)*3.6deg)) translateY(calc(50% - var(--chart-diameter)/2));
 }
