@@ -30,16 +30,24 @@
   <!----------------------->
   <!-- Main page content -->
 <main>
-  
+  <h2>Escape is one step away</h2>
   <h1 id="plan-name">My Plan</h1>
-  <button onpointerdown="newPlan()"></button>
-  <div></div>
-  <ul id="template-list">
-    <button onpointerdown="bostonPlan()"></button>
-    <button onpointerdown="parisPlan()"></button>
-  </ul>
 
-  <button onpointerdown="finalizePlan()"></button>
+  <div class="dialogue">
+    Not sure where to go?
+    <p>Input the number of cities you want to visit and let us handle the rest.<br>"I want to see <span id="out-city-count">1</span> cities."</p>
+    <input id="in-city-count" type="range" min="1" max="30">
+    <input id="in-city-count-submit" class="button" type="submit" value="Go">
+  </div>
+  <div class="dialogue">
+    <input class="button" type="button" value="Salect Cities">
+    <div>
+      <label for="berlin">Berlin</label>
+      <input id="berlin" type="radio">
+    </div>
+  </div>
+
+  <input id="in-submit" class="button" type="submit" value="Plan It!">
 
   <template id="t-location-selector">
     <div>

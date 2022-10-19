@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="../styles/index.css"></link>
   <link rel="stylesheet" href="../styles/sites/tripSelector.css"></link>
   <script type="module" src="../scripts/SQLim.js"></script>
-  <script type="module" src="../scripts/data/planOptionsDB.js"></script>
+  <!-- script type="module" src="../scripts/data/planOptionsDB.js"></script-->
   <script type="module" src="../scripts/sites/tripSelector.js"></script>
   
 </head>
@@ -30,12 +30,29 @@
 <main>
   <head></head>
   <body>
-  <h1>Your adventure awaits</h1>
-  <button onpointerdown="newPlan()"></button>
+  <h2>Your adventure awaits</h2>
   <div></div>
-  <div id="template-list">
-    <button onpointerdown="bostonPlan()"></button>
-    <button onpointerdown="parisPlan()"></button>
+  <div id="plan-list-template">
+    <a id="plan-option-boston" href="#">
+      <div>
+        <h3>Boston Plan</h3>
+        <p></p>
+      </div>
+    </a>
+    <a id="plan-option-paris" href="#">
+      <div>
+        <h3>Paris Plan</h3>
+        <p></p>
+      </div>
+    </a>
+  </div>
+  <div id="plan-list-custom">
+    <a href="./tripCustomizer.html">
+      <div>
+        <h3>Custom Plan</h3>
+        <p></p>
+      </div>
+    </a>
   </div>
   
   <template id="t-plan-titlecard">
