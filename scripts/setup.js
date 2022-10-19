@@ -1,0 +1,1 @@
+const ROOT_PATH = "https://raw.githubusercontent.com/xyphel/Project-1-European-Trip-Planner/main";

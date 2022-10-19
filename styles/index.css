@@ -1,7 +1,11 @@
 :root {
-    --chart-diameter: 200pix;
+    --chart-diameter: 85vw;
     --chart-progress: 40;
-    --chart-border: 3vw;
+    --chart-border: 1em;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 html, body {
@@ -97,15 +101,14 @@ input.dropdown:checked > form {
     display: contents;
 }
 div#progress-chart {
-    
     aspect-ratio: 1;
-    width: var(--chart-diameter);
+    min-width: var(--chart-diameter);
+    position: relative;
     display: inline-grid;
     place-content: center;
 }
 div#progress-chart::before {
     aspect-ratio: 1;
-    width: var(--chart-diameter);
     content: "";
     position: absolute;
     inset: 0;
@@ -118,11 +121,10 @@ div#progress-chart::before {
 }
 div#progress-chart::after {
     aspect-ratio: 1;
-    width: var(--chart-diameter);
     content: "";
     position: absolute;
     inset: calc(50% - var(--chart-border)/2);
     border-radius: 50%;
     background: rgb(112, 243, 255);
-    transform: rotate(calc(var(--chart-progressp)*3.6deg)) translateY(calc(50% - var(--chart-diameter)/2));
+    transform: rotate(calc(var(--chart-progress)*3.6deg)) translateY(calc(50% - var(--chart-diameter)/2));
 }

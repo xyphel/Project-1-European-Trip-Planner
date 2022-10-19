@@ -43,9 +43,14 @@ function removeCityFromPlan()
         "DELETE "
     );
 }
+function resetPlanRecordsDB()
+{
+  
+}
 
 export {
     listPlanRecords, listCities,
     addPlanRecord, delPlanRecord, modPlanRecord,
-    addCityToPlan, removeCityFromPlan
+    addCityToPlan, removeCityFromPlan,
+    resetPlanRecordsDB
   };

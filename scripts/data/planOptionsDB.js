@@ -24,8 +24,13 @@ async function delPlanOption(plan_name)
         "DELETE "
     );
 }
+function resetPlanOptionsDB()
+{
+  
+}
 
 export {
     listPlanOptions,
-    getPlanOption, addPlanOption, delPlanOption
+    getPlanOption, addPlanOption, delPlanOption,
+    resetPlanOptionsDB
   };

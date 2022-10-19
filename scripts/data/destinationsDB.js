@@ -56,6 +56,10 @@ function parseDestinationFile()
 {
   
 }
+function resetDestinationsDB()
+{
+  
+}
 
 
 export {
@@ -64,5 +68,6 @@ export {
     addDistance, addFood,
     delDistance, delFood, delCity,
     modDistance, modFoodCost,
-    parseDestinationFile
+    parseDestinationFile,
+    resetDestinationsDB
   };
