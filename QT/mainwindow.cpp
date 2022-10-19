@@ -39,22 +39,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    ConnOpen();
-    QSqlQuery q;
-    QString data = "";
-    q.exec("SELECT * FROM distances WHERE Ending_City = 'Rome';"); // SQL statement: means to output all values in the table where ending city is rome
-
-    while(q.next())
-    {
-        data += "Starting City: " + q.value(0).toString();
-        data += "\nEnding City: " + q.value(1).toString() + "\n";
-        data += "Distance between the two: " + q.value(2).toString() + "\n\n";
-    }
-
-    ui->textEdit->setText(data);
-
-    q.clear();
-    ConnClose();
+    SetDataBase();
 }
 
 void MainWindow::on_pushButton_2_clicked()
