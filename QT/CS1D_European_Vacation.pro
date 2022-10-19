@@ -14,6 +14,7 @@ SOURCES += \
     adminpage.cpp \
     berlintripwindow.cpp \
     custominput.cpp \
+    customwindow.cpp \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
     adminpage.h \
     berlintripwindow.h \
     custominput.h \
+    customwindow.h \
     loginwindow.h \
     mainwindow.h \
     newberlinwindow.h \
@@ -41,6 +43,7 @@ FORMS += \
     adminpage.ui \
     berlintripwindow.ui \
     custominput.ui \
+    customwindow.ui \
     loginwindow.ui \
     mainwindow.ui \
     newberlinwindow.ui \

@@ -39,6 +39,7 @@ custominput::custominput(QWidget *parent) :
 custominput::~custominput()
 {
     delete ui;
+    delete customWindow;
 }
 
 void custominput::on_comboBox_currentIndexChanged(int index)
@@ -46,9 +47,16 @@ void custominput::on_comboBox_currentIndexChanged(int index)
     ui->comboBox->setEnabled(false);
     ui->comboBox_2->setEnabled(true);
 
-    ui->textBrowser->setText(ui->textBrowser->toPlainText() + ui->comboBox->currentText() + "\nNext City: ");
+    QString city = ui->comboBox->currentText();
+    qDebug() << city;
 
-    cities.push_back(ui->comboBox->currentText());
+    ui->textBrowser->setText(ui->textBrowser->toPlainText() + city + "\nNext City: ");
+
+    if(city != "Select City")
+    {
+        cities.push_back(city);
+    }
+
 
     ConnOpen();
     QSqlQuery q;
@@ -69,7 +77,10 @@ void custominput::on_comboBox_currentIndexChanged(int index)
 
 void custominput::on_pushButton_clicked()
 {
+    customWindow = new customwindow(nullptr, cities);
 
+    customWindow->show();
+    this->close();
 }
 
 
@@ -83,9 +94,11 @@ void custominput::on_pushButton_3_clicked()
 {
     if(ui->comboBox_2->currentIndex() != 0)
     {
-        ui->textBrowser->setText(ui->textBrowser->toPlainText() + ui->comboBox_2->currentText() + "\nNext City: ");
+        QString city = ui->comboBox_2->currentText();
 
-        cities.push_back(ui->comboBox_2->currentText());
+        ui->textBrowser->setText(ui->textBrowser->toPlainText() + city + "\nNext City: ");
+
+        cities.push_back(city);
 
         ui->comboBox_2->removeItem(ui->comboBox_2->currentIndex());
 

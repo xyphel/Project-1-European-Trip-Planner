@@ -1,15 +1,14 @@
-#ifndef CUSTOMINPUT_H
-#define CUSTOMINPUT_H
+#ifndef CUSTOMWINDOW_H
+#define CUSTOMWINDOW_H
 
-#include <QDialog>
+#include <QMainWindow>
 #include "berlintripwindow.h"
-#include "customwindow.h"
 
 namespace Ui {
-class custominput;
+class customwindow;
 }
 
-class custominput : public QDialog
+class customwindow : public QMainWindow
 {
     Q_OBJECT
 
@@ -39,22 +38,22 @@ public:
 
     void ConnClose() { db.close();}
 
-    explicit custominput(QWidget *parent = nullptr);
-    ~custominput();
+    void DisplayReceipt();
+
+    explicit customwindow(QWidget *parent = nullptr, const vector<QString> &citiesVec = vector<QString>());
+    ~customwindow();
 
 private slots:
-    void on_comboBox_currentIndexChanged(int index);
-
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
 
-    void on_pushButton_3_clicked();
-
-private:
-    Ui::custominput *ui;
-    customwindow *customWindow;
+protected:
+    Ui::customwindow *ui;
+    TravelPlan *custom;
+    summarypage *summaryWindow;
+    TravelPlan::Receipt cityReceipt;
     vector<QString> cities;
 };
 
-#endif // CUSTOMINPUT_H
+#endif // CUSTOMWINDOW_H

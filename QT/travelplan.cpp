@@ -11,7 +11,7 @@ TravelPlan::TravelPlan(QSqlDatabase& db): db{db}
 {}
 TravelPlan::~TravelPlan()
 {}
-void TravelPlan::FindClosestCity(const QString& city, std::vector<QString> &cities, int size, bool berlin)
+void TravelPlan::FindClosestCity(const QString& city, std::vector<QString> &cities, int size, bool berlin, bool custom, vector<QString> customCities)
 {
     // Base Case
     if(cities.size() < size)
@@ -20,10 +20,23 @@ void TravelPlan::FindClosestCity(const QString& city, std::vector<QString> &citi
         std::list<QString> End;
         QSqlQuery q;
         QString string;
-        if(berlin)
+        if(berlin || custom)
         {
-            string = "SELECT DISTINCT Ending_City FROM Distances WHERE Starting_City = \'" + city + "\'"
-                    + "AND NOT ENDING_CITY = 'Stockholm' AND NOT ENDING_CITY = 'Vienna' ORDER BY Distance ASC";
+            if(custom)
+            {
+                string = "SELECT DISTINCT Ending_City FROM Distances WHERE Starting_City = \'" + city + "\'"
+                        + "AND ENDING_CITY = \'";
+                for(int i = 0; i < customCities.size(); i++)
+                {
+                    string += customCities[i] + "\' OR ENDING_CITY = \'";
+                }
+                string += "\' ORDER BY Distance ASC";
+            }
+            else
+            {
+                string = "SELECT DISTINCT Ending_City FROM Distances WHERE Starting_City = \'" + city + "\'"
+                        + "AND NOT ENDING_CITY = 'Stockholm' AND NOT ENDING_CITY = 'Vienna' ORDER BY Distance ASC";
+            }
         }
         else
         {
@@ -40,7 +53,7 @@ void TravelPlan::FindClosestCity(const QString& city, std::vector<QString> &citi
 
         cities.push_back(End.front());
 
-        FindClosestCity(End.front(), cities, size, berlin);
+        FindClosestCity(End.front(), cities, size, berlin, custom, customCities);
     }
 
     db.close();

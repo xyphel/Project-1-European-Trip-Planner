@@ -46,7 +46,8 @@ public:
     /*! func FindClosestCity
      * brief Constructor requires a QSqlDatabase reference.
      */
-    void FindClosestCity(const QString& city, std::vector<QString> &cities, int size = 10, bool berlin = false);
+    void FindClosestCity(const QString& city, std::vector<QString> &cities, int size = 10, bool berlin = false, bool custom = false,
+                         vector<QString> customCities = vector<QString>());
     bool CheckIfCityWasVisited(const QString& CITY, std::vector<QString>& visitedCities);
 
 };
