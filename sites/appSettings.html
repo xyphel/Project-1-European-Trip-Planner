@@ -15,7 +15,7 @@
   <script type="module" src="../scripts/SQLim.js"></script>
   <script type="module" src="../scripts/data/destinationsDB.js"></script>
   <script type="module" src="../scripts/data/planRecordsDB.js"></script>
-  <script type="module" src="../scripts/data/destinationsDB.js"></script>
+  <script type="module" src="../scripts/data/planOptionsDB.js"></script>
   <script type="module" src="../scripts/sites/appSettings.js"></script>
   
 </head>
@@ -32,14 +32,17 @@
 <main>
   
   <h1>Settings</h1>
-  <div class="dialogue">
+  
     <input id="in-search" class="button" type="search" name="dbSearch" list="dbEntries" placeholder="Search for a database">
-    <datalist id="dbEntries">
+    <datalist id="out-data-entries">
       <optgroup label="Destinations DB">
         <option value="All Cities"></option>
         <option value="Berlin"></option>
       </optgroup>
     </datalist>
+  <div id="out-data" class="dialogue">
+    <label>Berlin</label>
+    <input id="" class="button" type="radio" name="item">
   </div>
   <input type="reset" value="Done" for>
 

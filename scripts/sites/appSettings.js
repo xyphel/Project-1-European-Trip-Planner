@@ -11,9 +11,9 @@ import {
 
 function load()
 {
-    const IN_SEARCH = document.querySelector("#in-search");
-    const IN_FILE = document.querySelector("#in-file");
-    const IN_RESET = document.querySelector("#in-reset");
+    const IN_SEARCH = document.getElementById("#in-search");
+    const IN_FILE = document.getElementById("#in-file");
+    const IN_RESET = document.getElementById("#in-reset");
 
     IN_SEARCH.onchange = (event) =>
     {
