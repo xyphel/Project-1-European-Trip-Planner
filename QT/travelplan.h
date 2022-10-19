@@ -7,48 +7,76 @@
 
 using namespace std;
 
+/// TravelPlan class
+///
+/// Holds the functionality and the data used for the different
+/// travel plans
 class TravelPlan
 {
 private:
-    /*! func Compare
-     * brief Returns whether two QStrings are equal.
-     */
-    bool Compare(const QString& str1, const QString& str2);
+    /// Compare cities
+    ///
+    /// Checks if two city strings are the same
+    /// @param city1 first city name
+    /// @param city2 second city name
+    /// @returns if they are the same or not
+    bool Compare(const QString& city1, const QString& city2);
 public:
-
-    vector<QString> visitedCities; /*!< Contains previosly visited cities' names. */
-    QSqlDatabase& db; /*!< Poimter to primary, shared sql database. */
-    int cityIndex; /*!< Index of current city. */
-    int cityCount; /*!< Number of cities in this plan. */
+    /// Contains previosly visited cities' names.
+    vector<QString> visitedCities;
+    /// Pointer to primary, shared sql database.
+    QSqlDatabase& db;
+    /// Index of current city.
+    int cityIndex;
+    /// Number of cities in this plan.
+    int cityCount;
 public:
-    /*! struct Receipt
-     * brief Container for receipt-specific data members.
-     */
+    /// Receipt struct
+    ///
+    /// Holds the items needed to display the receipt
     struct Receipt
     {
-        std::vector<double> costOfItems; /*!< Cost of each purchased item. Order synced with itemsBought */
-        std::vector<QString> itemsBought; /*!< Name of each purchased item. Order synced with costOfItems */
-        double cost; /*!< Total travel expenses. */
-        int distanceTraveled; /*!< Total distance traveled. */
+        /// Cost of each purchased item. Order synced with itemsBought
+        std::vector<double> costOfItems;
+        /// Name of each purchased item. Order synced with costOfItems
+        std::vector<QString> itemsBought;
+        /// Total travel expenses
+        double cost;
+        /// Total distance traveled.
+        int distanceTraveled;
     };
-    QString currentCity; /*!< Name of current city. */
-    Receipt receipt; /*!< This plan's receipt. */
+    /// Name of current city
+    QString currentCity;
+    /// This plan's receipt
+    Receipt receipt;
+    /// This plan's current city receipt
     Receipt cityReceipt;
 
-    /*! func TravelPlan
-     * brief Constructor requires a QSqlDatabase reference.
-     */
+    /// TravelPlan constructor
+    ///
+    /// Constructs TravelPlan object needs database
     TravelPlan(QSqlDatabase& db);
-    /*! func ~TravelPlan
-     * brief Destructor.
-     */
+
     ~TravelPlan();
-    /*! func FindClosestCity
-     * brief Constructor requires a QSqlDatabase reference.
-     */
+
+    /// Finds closest city
+    ///
+    /// This method recursively finds the closest city
+    /// @param city city to find closest city to
+    /// @param cities vector of cities that will be visisted
+    /// @param size amount of cities wanting to visit
+    /// @param berlin if the method is being used for the initial berlin plan
+    /// @param custom if the method is being used for the custom plan
+    /// @param customCities custom set of cities to visit
     void FindClosestCity(const QString& city, std::vector<QString> &cities, int size = 11, bool berlin = false, bool custom = false,
                          vector<QString> customCities = vector<QString>());
-    bool CheckIfCityWasVisited(const QString& CITY, std::vector<QString>& visitedCities);
+
+    /// Checks if city was visited
+    ///
+    /// Goes through the vector of cities to see if the passed city was already visited
+    /// @param city city to check if visited
+    /// @param visitedCities vector of cities already visited
+    bool CheckIfCityVisited(const QString& city, std::vector<QString>& visitedCities);
 
 };
 

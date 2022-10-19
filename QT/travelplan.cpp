@@ -16,12 +16,16 @@ void TravelPlan::FindClosestCity(const QString& city, std::vector<QString> &citi
     // Base Case
     if(cities.size() < size)
     {
+        // opens database
         db.open();
         std::list<QString> End;
         QSqlQuery q;
         QString string;
+
+        // if berlin plan or custom plan execute a different sql statement
         if(berlin || custom)
         {
+            // if custom add each city the user wants to visit into the sql statement
             if(custom)
             {
 
@@ -36,6 +40,7 @@ void TravelPlan::FindClosestCity(const QString& city, std::vector<QString> &citi
             }
             else
             {
+                // if berlin excluded the added cities from the sql statement
                 string = "SELECT DISTINCT Ending_City FROM Distances WHERE Starting_City = \'" + city + "\'"
                         + "AND NOT ENDING_CITY = 'Stockholm' AND NOT ENDING_CITY = 'Vienna' ORDER BY Distance ASC";
             }
@@ -44,45 +49,50 @@ void TravelPlan::FindClosestCity(const QString& city, std::vector<QString> &citi
         }
         else
         {
+            // default sql statement
             string = "SELECT DISTINCT Ending_City FROM Distances WHERE Starting_City = \'" + city + "\' ORDER BY Distance ASC";
         }
         q.exec(string);
 
+        // get first closest city from current city and add it to list
         while(q.next())
         {
             End.push_back(q.value(0).toString());
         }
 
-        for(; !CheckIfCityWasVisited(End.front(), cities); End.pop_front());
+        // check if the city has been visisted
+        for(; !CheckIfCityVisited(End.front(), cities); End.pop_front());
 
+        // add to the vector if it hasn't
         cities.push_back(End.front());
 
+        // recall function until you reach amount of cities wanted to visit
         FindClosestCity(End.front(), cities, size, berlin, custom, customCities);
     }
 
     db.close();
 }
 
-bool TravelPlan::CheckIfCityWasVisited(const QString& CITY, std::vector<QString>& visitedCities)
+bool TravelPlan::CheckIfCityVisited(const QString& city, std::vector<QString>& visitedCities)
 {
-
+    // checks the cities vector to if the city passed has been visited before
     for(unsigned int i = 0; i < visitedCities.size(); i++)
     {
-        if(Compare(CITY, visitedCities[i]))
+        if(Compare(city, visitedCities[i]))
             return false;
     }
     return true;
 }
 
-bool TravelPlan::Compare(const QString& str1, const QString& str2)
+bool TravelPlan::Compare(const QString& city1, const QString& city2)
 {
     // returns true if they are equal
-    if(str1.size() != str2.size())
+    if(city1.size() != city2.size())
         return false;
 
-    for(int i = 0; i < str1.size(); i++)
+    for(int i = 0; i < city1.size(); i++)
     {
-        if(str1[i] != str2[i])
+        if(city1[i] != city2[i])
             return false;
     }
     return true;

@@ -8,15 +8,17 @@ adminpage::adminpage(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->lineEdit->setEnabled(false);
-    SetDataBase();
+    SetDataBase(); // sets database
 
+    // sets models of the database to be displayed
     model = new QSqlQueryModel();
     model2 = new QSqlQueryModel();
-    DisplayData(model, model2);
+    DisplayData(model, model2); // displays the model
 
     ui->comboBox->addItem("Select Food item");
     ui->comboBox_2->addItem("Select City");
 
+    // opens database and sets the values of the combobox to entries from the database
     ConnOpen();
     QSqlQuery q;
     q.exec("SELECT * FROM foods ORDER BY City ASC"); // SQL statement: means to output all values in the table
@@ -45,6 +47,8 @@ adminpage::~adminpage()
 
 void adminpage::DisplayData(QSqlQueryModel* model, QSqlQueryModel* model2)
 {
+    // uses the models passed in and sets the data from the database to them
+    // to be displayed
     ConnOpen();
     QSqlQuery* qry = new QSqlQuery(db);
 
@@ -68,9 +72,11 @@ void adminpage::DisplayData(QSqlQueryModel* model, QSqlQueryModel* model2)
 
 void adminpage::on_comboBox_currentIndexChanged(int index)
 {
+    // first comboBox holds all the food items to be updated in the database
     QString name = "";
     QString cost = "";
 
+    // sets the name in the comboBox to a lineEdit for ui purposes
     if(index > 0)
     {
         name = ui->comboBox->itemText(index);
@@ -79,8 +85,9 @@ void adminpage::on_comboBox_currentIndexChanged(int index)
 
         ConnOpen();
         QSqlQuery q;
-        q.exec("SELECT cost FROM foods WHERE Food = \'" + name + "\'"); // SQL statement: means to output all values in the table
+        q.exec("SELECT cost FROM foods WHERE Food = \'" + name + "\'");
 
+        // gets cost of the selected food item
         while(q.next())
         {
             cost = q.value(0).toString();
@@ -96,6 +103,7 @@ void adminpage::on_comboBox_currentIndexChanged(int index)
 
 void adminpage::on_pushButton_clicked()
 {
+    // updates the cost of the selected food item
     if(ui->comboBox->currentIndex() > 0)
     {
         QString foodName = "";
@@ -104,13 +112,15 @@ void adminpage::on_pushButton_clicked()
         foodName = ui->lineEdit->text();
         foodPrice = ui->lineEdit_2->text();
 
+        // checks the price the user inputted to see if it's a valid input
         if(NumCheck(foodPrice))
         {
+            // if valid it updates the database
             ConnOpen();
             QSqlQuery q;
             QString sql = "update foods set cost ='"+foodPrice+"' where Food = '"+foodName+"'";
             qDebug() << sql;
-            q.exec(sql); // SQL statement: means to output all values in the table
+            q.exec(sql);
             ConnClose();
 
             DisplayData(model, model2);
@@ -128,6 +138,7 @@ void adminpage::on_pushButton_clicked()
 
 void adminpage::on_pushButton_2_clicked()
 {
+    // deletes the current food item from the database
     if(ui->comboBox->currentIndex() > 0)
     {
         QString foodName = "";
@@ -138,7 +149,7 @@ void adminpage::on_pushButton_2_clicked()
         QSqlQuery q;
         QString sql = "delete from foods where Food = '"+foodName+"'";
         qDebug() << sql;
-        q.exec(sql); // SQL statement: means to output all values in the table
+        q.exec(sql);
         ConnClose();
 
         DisplayData(model, model2);
@@ -153,6 +164,8 @@ void adminpage::on_pushButton_2_clicked()
 
 void adminpage::on_comboBox_2_currentIndexChanged(int index)
 {
+    // disables the lineEdits and buttons unless a food item is
+    // selected
     if(ui->comboBox_2->currentIndex() == 0)
     {
         ui->lineEdit_3->setEnabled(false);
@@ -170,22 +183,26 @@ void adminpage::on_comboBox_2_currentIndexChanged(int index)
 
 void adminpage::on_pushButton_3_clicked()
 {
+    // takes an input from user and adds it to the database
     QString foodName = "";
     QString foodPrice = "";
     QString cityName = "";
 
+    // reads input
     foodName = ui->lineEdit_3->text();
     foodPrice = ui->lineEdit_4->text();
 
     cityName = ui->comboBox_2->currentText();
 
+    // checks if price is a valid input
     if(NumCheck(foodPrice))
     {
+        // if valid adds the food to the database
         ConnOpen();
         QSqlQuery q;
         QString sql = "insert into foods (City, Food, Cost) values (\'" + cityName +"\', \'" + foodName +"\' , \'" + foodPrice + "\')";
         qDebug() << sql;
-        q.exec(sql); // SQL statement: means to output all values in the table
+        q.exec(sql);
         ConnClose();
 
         DisplayData(model, model2);
@@ -207,6 +224,7 @@ void adminpage::on_pushButton_3_clicked()
 
 void adminpage::on_pushButton_4_clicked()
 {
+    // opens file directory and accepts a text file to be open
     QString filePath = QFileDialog::getOpenFileName(this,"European Trip Planner - Open File",QDir::homePath(),"Text Files (*.txt)");
 
     QFile file(filePath);
@@ -226,6 +244,7 @@ void adminpage::on_pushButton_4_clicked()
 
 void adminpage::AddFromFile(QTextStream& iFile)
 {
+    // reads the text file line from line and inserts the data into the database
     QStringList fields;
     QString line;
 
@@ -238,9 +257,11 @@ void adminpage::AddFromFile(QTextStream& iFile)
 
     while(!iFile.atEnd())
     {
+        // checks first line to see if it's a food item or city
         line = iFile.readLine();
         if(line != "New Food" && !food)
         {
+            // if city split the line at each space and insert the data into the database
             fields.append(line.split(' '));
             sql = "insert into distances (Starting_City, Ending_City, Distance) values (\'" + fields.at(0) + "\', \'" + fields.at(1) + "\', \'" + fields.at(2) + "\')";
             q.exec(sql);
@@ -248,6 +269,7 @@ void adminpage::AddFromFile(QTextStream& iFile)
         }
         else
         {
+            // if food read each line and split at the $ sign and add the data into the database
             food = true;
 
             if(line == "New Food")
@@ -282,6 +304,7 @@ void adminpage::AddFromFile(QTextStream& iFile)
     ui->comboBox->addItem("Select Food item");
     ui->comboBox_2->addItem("Select City");
 
+    // updates the comboBoxes to add the new data inserted
     ConnOpen();
     q.exec("SELECT * FROM foods ORDER BY City ASC"); // SQL statement: means to output all values in the table
     QString name = "";

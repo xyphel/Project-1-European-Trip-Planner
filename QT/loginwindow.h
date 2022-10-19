@@ -13,6 +13,10 @@ namespace Ui {
 class loginwindow;
 }
 
+/// loginWindow
+///
+/// Pop up window that allows the user to enter
+/// login credentials
 class loginwindow : public QWidget
 {
     Q_OBJECT

@@ -12,15 +12,25 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+/// MainWindow
+///
+/// Main window displays the initial information of
+/// the program
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
+    /// holds the database for the program
     QSqlDatabase db;
 
+    /// Sets database
+    ///
+    /// This method gets a path from the administrator and looks for the database
+    /// in that given path and sets the database variable to that database
     void SetDataBase()
     {
+        // sets database path and name for the database variable
         db = QSqlDatabase::addDatabase("QSQLITE");
         QString path = "C:/Users/andre/Documents/GitHub/Project-1-European-Trip-Planner/QT/DB/Cities.sqlite3";
         qInfo() << path;
@@ -28,8 +38,13 @@ public:
 
     }
 
+    /// Opens database
+    ///
+    /// Calls database method to open database and returns to console
+    /// if opened properly
     void ConnOpen()
     {
+        // opens database and outputs if it opened sucessfully
         if(db.open())
         {
             qDebug() << ("Connected.");
@@ -40,10 +55,12 @@ public:
         }
     }
 
+    /// Closes database
+    ///
+    /// Calls databse method to close database
     void ConnClose() { db.close();}
 
     MainWindow(QWidget *parent = nullptr);
-    void getDatabase();
     ~MainWindow();
 
 private slots:

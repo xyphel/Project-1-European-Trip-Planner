@@ -18,12 +18,14 @@ loginwindow::~loginwindow()
 
 void loginwindow::on_loginButton_clicked()
 {
+    // checks if user name or password is correct
     if(ADMINISTRATOR_USERNAME == ui->usernameTextEdit->toPlainText() && ADMINISTRATOR_PASSWORD == ui->passwordTextEdit->toPlainText())
     {
         QMessageBox::information(this, "Login", "Login Successful!");
         emit loginSuccessful();
         close();
 
+        // if correct open the admin page
         admin = new adminpage();
 
         admin->show();

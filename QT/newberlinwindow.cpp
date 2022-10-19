@@ -5,18 +5,23 @@ newberlinwindow::newberlinwindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::newberlinwindow)
 {
+    // sets up ui
     ui->setupUi(this);
 
+    // sets database
     SetDataBase();
     ConnOpen();
 
+    // creates travelPlan object for trip
     berlin = new TravelPlan(db);
 
+    // instantiates variables
     berlin->cityIndex = 0;
     berlin->receipt.cost = 0;
     berlin->receipt.distanceTraveled = 0;
     berlin->currentCity = "Berlin";
 
+    // sets up ui for city
     QFont font = ui->label->font();
     font.setBold(true);
     font.setPointSize(15);
@@ -27,6 +32,8 @@ newberlinwindow::newberlinwindow(QWidget *parent) :
     ui->label_2->setText("Welcome to " + berlin->currentCity);
     ui->label->setText(berlin->currentCity);
 
+    // displays the food items of the current city and adds
+    // them to the comboBox
     QSqlQuery q;
     q.exec("SELECT food, Cost FROM foods WHERE City = 'Berlin'");
     QString data = "";
@@ -44,6 +51,7 @@ newberlinwindow::newberlinwindow(QWidget *parent) :
     ui->textBrowser->setText(data);
     ConnClose();
 
+    // finds the closest cities recursively
     berlin->visitedCities.push_back(berlin->currentCity);
     berlin->FindClosestCity(berlin->currentCity, berlin->visitedCities, 13);
     berlin->cityReceipt.cost = 0;
@@ -60,6 +68,7 @@ newberlinwindow::~newberlinwindow()
 
 void newberlinwindow::on_pushButton_2_clicked()
 {
+    // purchases the selected food
     ConnOpen();
     QString string = "";
     QString s = "";
@@ -79,6 +88,7 @@ void newberlinwindow::on_pushButton_2_clicked()
     berlin->cityReceipt.cost += s.toDouble();
     berlin->receipt.cost += s.toDouble();
 
+    // updates the receipt of the selected city
     DisplayReceipt();
 
     qInfo() << berlin->receipt.cost;
@@ -88,8 +98,10 @@ void newberlinwindow::on_pushButton_2_clicked()
 
 void newberlinwindow::on_pushButton_clicked()
 {
+    // goes to the next city
     if(berlin->cityIndex != 12)
     {
+        // updates ui for the new city
         berlin->cityReceipt.itemsBought.clear();
         berlin->cityReceipt.costOfItems.clear();
         berlin->cityReceipt.cost = 0;
@@ -108,6 +120,7 @@ void newberlinwindow::on_pushButton_clicked()
         ui->label->setText(berlin->currentCity);
         ui->label_2->setText("Welcome to " + berlin->currentCity);
 
+        // displays food items of the current city
         q.exec("SELECT food, Cost FROM foods WHERE City = \'" + berlin->currentCity + "\'");
         QString data = "";
         QString dataCombo = "";
@@ -120,6 +133,7 @@ void newberlinwindow::on_pushButton_clicked()
         }
         ui->textBrowser->setText(data);
 
+        // gets distance from previous city to current city and adds it to the total
         q.exec("SELECT Distance FROM Distances WHERE Starting_City = \'" + berlin->currentCity + "\' AND Ending_City = \'" + berlin->visitedCities[berlin->cityIndex-1] + "\'");
         while(q.next())
         {
@@ -131,6 +145,7 @@ void newberlinwindow::on_pushButton_clicked()
     }
     else
     {
+        // if all cities visited open summaryPage
         this->hide();
         summaryWindow = new summarypage(this);
         summaryWindow->GetData(berlin->receipt);
@@ -142,6 +157,7 @@ void newberlinwindow::on_pushButton_clicked()
 
 void newberlinwindow::DisplayReceipt()
 {
+    // displays the total cost of items purchased from the current city
     QString receipt = "";
     for(int i = 0; i < berlin->cityReceipt.costOfItems.size(); i++)
     {

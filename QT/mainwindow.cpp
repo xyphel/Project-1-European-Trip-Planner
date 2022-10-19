@@ -6,10 +6,12 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    // sets up ui
     ui->setupUi(this);
     ui->comboBox->addItem("Select City");
     ui->comboBox_2->addItem("Select City");
 
+    // sets data base and puts cities into comboBoxes
     SetDataBase();
     ConnOpen();
     QSqlQuery q;
@@ -39,11 +41,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
+    // refreshes database
     SetDataBase();
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    // opens trip planning window
     tripWindow = new planTripWindow(this);
 
     tripWindow->show();
@@ -52,6 +56,7 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_comboBox_currentIndexChanged(int index)
 {
+    // displays the food items of the selected city
     ConnOpen();
     QSqlQuery q;
     q.exec("SELECT food, cost FROM foods WHERE City = \'" + ui->comboBox->itemText(index) + "\'"); // SQL statement: means to output all values in the table
@@ -69,6 +74,7 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
 
 void MainWindow::on_comboBox_2_currentIndexChanged(int index)
 {
+    // displays the distance from the selected city to rome
     ConnOpen();
     QSqlQuery q;
     q.exec("SELECT Distance FROM Distances WHERE Ending_City = 'Rome' AND Starting_City = \'" + ui->comboBox_2->itemText(index) + "\'"); // SQL statement: means to output all values in the table
@@ -87,6 +93,7 @@ void MainWindow::on_comboBox_2_currentIndexChanged(int index)
 
 void MainWindow::on_actionSign_in_triggered()
 {
+    // opens login window
     loginWindow = new loginwindow();
     loginWindow->show();
 }
