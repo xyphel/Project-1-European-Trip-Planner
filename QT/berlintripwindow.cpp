@@ -48,7 +48,7 @@ berlinTripWindow::berlinTripWindow(QWidget *parent) :
     ConnClose();
 
     berlin->visitedCities.push_back(berlin->currentCity);
-    berlin->FindClosestCity(berlin->currentCity, berlin->visitedCities);
+    berlin->FindClosestCity(berlin->currentCity, berlin->visitedCities, 10, true);
     berlin->cityReceipt.cost = 0;
     DisplayReceipt();
 }

@@ -6,6 +6,7 @@
 #include "loginwindow.h"
 #include "newberlinwindow.h"
 #include "parisinput.h"
+#include "custominput.h"
 
 namespace Ui {
 class planTripWindow;
@@ -55,12 +56,15 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void on_pushButton_4_clicked();
+
 private:
     Ui::planTripWindow *ui;
     berlinTripWindow *berlinPlanWindow;
     newberlinwindow *newBerlinPlanWindow;
     loginwindow *loginWindow;
     parisinput *parisInput;
+    custominput *customInput;
 };
 
 #endif // PLANTRIPWINDOW_H

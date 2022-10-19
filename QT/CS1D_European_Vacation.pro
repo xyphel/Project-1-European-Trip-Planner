@@ -13,6 +13,7 @@ CONFIG += c++11
 SOURCES += \
     adminpage.cpp \
     berlintripwindow.cpp \
+    custominput.cpp \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
 HEADERS += \
     adminpage.h \
     berlintripwindow.h \
+    custominput.h \
     loginwindow.h \
     mainwindow.h \
     newberlinwindow.h \
@@ -38,6 +40,7 @@ HEADERS += \
 FORMS += \
     adminpage.ui \
     berlintripwindow.ui \
+    custominput.ui \
     loginwindow.ui \
     mainwindow.ui \
     newberlinwindow.ui \

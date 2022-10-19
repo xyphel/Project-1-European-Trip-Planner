@@ -17,6 +17,7 @@ planTripWindow::~planTripWindow()
     delete loginWindow;
     delete berlinPlanWindow;
     delete parisInput;
+    delete customInput;
 }
 
 void planTripWindow::on_pushButton_clicked()
@@ -85,5 +86,13 @@ bool planTripWindow::CheckCitiesAdded()
     ConnClose();
 
     return dataInserted;
+}
+
+
+void planTripWindow::on_pushButton_4_clicked()
+{
+    customInput = new custominput();
+    customInput->show();
+    this->close();
 }
 
