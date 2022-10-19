@@ -48,7 +48,7 @@ berlinTripWindow::berlinTripWindow(QWidget *parent) :
     ConnClose();
 
     berlin->visitedCities.push_back(berlin->currentCity);
-    berlin->FindClosestCity(berlin->currentCity, berlin->visitedCities, 10, true);
+    berlin->FindClosestCity(berlin->currentCity, berlin->visitedCities, 11, true);
     berlin->cityReceipt.cost = 0;
     DisplayReceipt();
 }
@@ -91,7 +91,7 @@ void berlinTripWindow::on_pushButton_2_clicked()
 
 void berlinTripWindow::on_pushButton_clicked()
 {
-    if(berlin->cityIndex != 9)
+    if(berlin->cityIndex != 10)
     {
         berlin->cityReceipt.itemsBought.clear();
         berlin->cityReceipt.costOfItems.clear();

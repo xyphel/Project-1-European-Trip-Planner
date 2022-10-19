@@ -24,11 +24,13 @@ void TravelPlan::FindClosestCity(const QString& city, std::vector<QString> &citi
         {
             if(custom)
             {
+
                 string = "SELECT DISTINCT Ending_City FROM Distances WHERE Starting_City = \'" + city + "\'"
                         + "AND ENDING_CITY = \'";
                 for(int i = 0; i < customCities.size(); i++)
                 {
-                    string += customCities[i] + "\' OR ENDING_CITY = \'";
+                    string += customCities[i] + "\' OR Starting_City = \'" + city + "\'"
+                            + "AND ENDING_CITY = \'";
                 }
                 string += "\' ORDER BY Distance ASC";
             }
@@ -37,6 +39,8 @@ void TravelPlan::FindClosestCity(const QString& city, std::vector<QString> &citi
                 string = "SELECT DISTINCT Ending_City FROM Distances WHERE Starting_City = \'" + city + "\'"
                         + "AND NOT ENDING_CITY = 'Stockholm' AND NOT ENDING_CITY = 'Vienna' ORDER BY Distance ASC";
             }
+
+            qDebug() << string;
         }
         else
         {
