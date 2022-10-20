@@ -33,23 +33,21 @@
   
   <h1>Settings</h1>
   
-    <input id="in-search" class="button" type="search" name="dbSearch" list="dbEntries" placeholder="Search for a database">
+    <input id="in-search" class="button" type="search" name="dbSearch" list="out-data-entries" placeholder="Search for a database">
     <datalist id="out-data-entries">
-      <optgroup label="Destinations DB">
+      <!--optgroup label="Destinations DB"-->
         <option value="All Cities"></option>
         <option value="Berlin"></option>
-      </optgroup>
+      <!--/optgroup-->
     </datalist>
-  <div id="out-data" class="dialogue">
-    <label>Berlin</label>
-    <input id="" class="button" type="radio" name="item">
+    <h3>All Destinations DB</h3>
+  <div id="out-data" class="dialogue  color-context">
+    <input id="entry-" class="button" type="radio" name="item">
+    <label for="entry-1">Berlin</label>
   </div>
   <input type="reset" value="Done" for>
 
-  <div class="database-container">
-    <h3>Distances Database</h3>
-    <textarea id="database-distances"></textarea>
-  </div>
+  <br><br><br>
   
   <h2>Administrator</h2>
   <form id="admin-credentials" action="" style="display: none;">

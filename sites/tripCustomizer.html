@@ -33,17 +33,20 @@
   <h2>Escape is one step away</h2>
   <h1 id="plan-name">My Plan</h1>
 
-  <div class="dialogue">
+  <div class="dialogue color-context">
     Not sure where to go?
     <p>Input the number of cities you want to visit and let us handle the rest.<br>"I want to see <span id="out-city-count">1</span> cities."</p>
-    <input id="in-city-count" type="range" min="1" max="30">
+    <input id="in-city-count" type="number" min="1" max="30">
     <input id="in-city-count-submit" class="button" type="submit" value="Go">
   </div>
-  <div class="dialogue">
-    <input class="button" type="button" value="Salect Cities">
+  <div class="dialogue color-error"></div>
+  <div class="dialogue color-context">
+    <input class="button" type="button" value="Select Cities">
     <div>
+      <input id="berlin" type="checkbox">
+      <label for="berlin">Berlin</label><br>
+      <input id="berlin" type="checkbox">
       <label for="berlin">Berlin</label>
-      <input id="berlin" type="radio">
     </div>
   </div>
 

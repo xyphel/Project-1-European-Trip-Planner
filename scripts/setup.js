@@ -6,11 +6,29 @@ const PERSISTENT_STATE = [
     "is_plan_complete", // jump to plan record
     "is_plan_drafted"   // jump to saved plan
 ];
+const LOCAL_STORAGE = window.localStorage;
 
 PERSISTENT_STATE.forEach(state_key =>
 {
-    if(local_storage.getItem(state_key) == null)
+    if(LOCAL_STORAGE.getItem(state_key) === null)
     {
-        local_storage.setItem(state_key, "false")
+        LOCAL_STORAGE.setItem(state_key, "false")
     }
 });
+
+if(LOCAL_STORAGE.getItem("is_plan_active") === "true")
+  {
+    location.replace(`${ROOT_PATH}/sites/tripViewer`);
+  }
+  else if( LOCAL_STORAGE.getItem("is_plan_completed") === "true" )
+  {
+    location.replace(`${ROOT_PATH}/sites/tripRecord`);
+  }
+  else if( LOCAL_STORAGE.getItem("is_plan_drafted") === "true" )
+  {
+    location.replace(`${ROOT_PATH}/sites/tripCustomizer`);
+  }
+  else
+  {
+    location.replace(`${ROOT_PATH}/sites/tripSelector`);
+  }

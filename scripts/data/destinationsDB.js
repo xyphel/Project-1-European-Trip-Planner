@@ -52,7 +52,7 @@ function modFoodCost()
 {
   
 }
-function parseDestinationFile()
+function addDestinationsFromFile()
 {
   
 }
@@ -68,6 +68,6 @@ export {
     addDistance, addFood,
     delDistance, delFood, delCity,
     modDistance, modFoodCost,
-    parseDestinationFile,
+    addDestinationsFromFile,
     resetDestinationsDB
   };

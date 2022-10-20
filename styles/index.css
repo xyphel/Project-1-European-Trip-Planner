@@ -92,7 +92,15 @@ div.dialogue {
     padding: 1vw;
     margin: 1ex;
     border-radius: 25px;
+}
+.color-context {
     background-color: rgb(0, 136, 255);
+}
+.color-error {
+    background-color: rgb(255, 115, 81);
+}
+.color-interactive {
+    background-color: rgb(89, 114, 255);
 }
 input.button {
     border-radius: 25px;
